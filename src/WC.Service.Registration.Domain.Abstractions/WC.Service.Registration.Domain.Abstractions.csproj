@@ -4,11 +4,6 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>WC.Service.Registration.Domain</RootNamespace>
     </PropertyGroup>
-
-    <ItemGroup>
-      <PackageReference Include="WC.Library.Domain.Abstractions" Version="1.0.1" />
-    </ItemGroup>
 
 </Project>
