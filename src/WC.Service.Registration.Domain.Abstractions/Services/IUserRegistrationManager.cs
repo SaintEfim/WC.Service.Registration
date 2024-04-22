@@ -4,7 +4,7 @@ using WC.Service.Registration.Domain.Models.Requests;
 
 namespace WC.Service.Registration.Domain.Services;
 
-public interface IUserCredentialManager : IDataManager<UserCredentialModel>
+public interface IUserRegistrationManager : IDataManager<UserRegistrationModel>
 {
     Task Register(
         RegistrationRequestModel registrationRequestModel,

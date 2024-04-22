@@ -3,4 +3,4 @@ using WC.Service.Registration.Data.Models;
 
 namespace WC.Service.Registration.Data.Repository;
 
-public interface IUserCredentialRepository : IRepository<UserCredentialEntity>;
+public interface IUserRegistrationRepository : IRepository<UserRegistrationEntity>;

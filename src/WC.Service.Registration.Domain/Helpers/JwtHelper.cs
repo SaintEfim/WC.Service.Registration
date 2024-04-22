@@ -23,10 +23,10 @@ public class JwtHelper : IJwtHelper
             _logger.LogError($"{nameof(userId)} or {nameof(secretKey)} must not be null or empty.");
             throw new Exception("An error occurred while processing your request.");
         }
-        
+
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = await GenerateKey(secretKey, cancellationToken).ConfigureAwait(false);
-        
+
         if (key == null)
         {
             _logger.LogError("Failed to generate key.");
@@ -37,7 +37,7 @@ public class JwtHelper : IJwtHelper
 
         if (claims == null)
         {
-            _logger.LogError("Failed to generate claims."); 
+            _logger.LogError("Failed to generate claims.");
             throw new Exception("An error occurred while processing your request.");
         }
 
@@ -59,7 +59,7 @@ public class JwtHelper : IJwtHelper
     {
         if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(secretKey))
         {
-            _logger.LogError("Token or secretKey must not be null or empty."); 
+            _logger.LogError("Token or secretKey must not be null or empty.");
             throw new Exception("An error occurred while processing your request.");
         }
 
@@ -68,7 +68,7 @@ public class JwtHelper : IJwtHelper
 
         if (key == null)
         {
-            _logger.LogError("Failed to generate key."); 
+            _logger.LogError("Failed to generate key.");
             throw new Exception("An error occurred while processing your request.");
         }
 

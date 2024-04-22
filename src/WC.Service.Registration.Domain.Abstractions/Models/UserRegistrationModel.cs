@@ -2,7 +2,7 @@
 
 namespace WC.Service.Registration.Domain.Models;
 
-public class UserCredentialModel : ModelBase
+public class UserRegistrationModel : ModelBase
 {
     public string Email { get; init; } = string.Empty;
     public string Password { get; init; } = string.Empty;

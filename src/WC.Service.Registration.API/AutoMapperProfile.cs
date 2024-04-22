@@ -9,8 +9,8 @@ public sealed class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<UserCredentialModel, UserCredentialDto>();
-        
+        CreateMap<UserRegistrationModel, UserRegistrationDto>();
+
         CreateMap<RegistrationRequestDto, RegistrationRequestModel>();
     }
 }

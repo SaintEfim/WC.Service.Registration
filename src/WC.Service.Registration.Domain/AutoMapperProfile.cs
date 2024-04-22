@@ -9,9 +9,9 @@ public sealed class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<RegistrationRequestModel, UserCredentialEntity>()
+        CreateMap<RegistrationRequestModel, UserRegistrationEntity>()
             .ForMember(dest => dest.Role,
                 opt => { opt.MapFrom(src => string.IsNullOrEmpty(src.Role) ? "user" : src.Role); });
-        CreateMap<UserCredentialModel, UserCredentialEntity>().ReverseMap();
+        CreateMap<UserRegistrationModel, UserRegistrationEntity>().ReverseMap();
     }
 }

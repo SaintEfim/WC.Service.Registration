@@ -12,7 +12,7 @@ public class ServiceAuthifyDomainModule : Module
         ContainerBuilder builder)
     {
         builder.RegisterModule<ServiceAuthifyDataPostgreSqlModule>();
-        
+
         builder.RegisterAssemblyTypes(ThisAssembly)
             .AsClosedTypesOf(typeof(IDataProvider<>))
             .AsImplementedInterfaces();
