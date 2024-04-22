@@ -3,11 +3,11 @@ using WC.Library.Data.PostgreSql.Context;
 
 namespace WC.Service.Registration.Data.PostgreSql.Context;
 
-public class UserCredentialDbContextFactory : PostgreSqlDbContextFactoryBase<UserCredentialDbContext>
+public class UserRegistrationDbContextFactory : PostgreSqlDbContextFactoryBase<UserRegistrationDbContext>
 {
     protected override string ConnectionString => "WorkChatDB";
-    
-    public UserCredentialDbContextFactory(IConfiguration configuration) : base(configuration)
+
+    public UserRegistrationDbContextFactory(IConfiguration configuration) : base(configuration)
     {
     }
 }

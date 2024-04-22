@@ -5,7 +5,7 @@ namespace WC.Service.Registration.API.Models;
 /// <summary>
 /// The person responsible for some object processing or the one who is currently executing some task.
 /// </summary>
-public class UserCredentialDto : DtoBase
+public class UserRegistrationDto : DtoBase
 {
     /// <summary>
     /// The email address of the user.
@@ -23,7 +23,7 @@ public class UserCredentialDto : DtoBase
     public string Role { get; init; } = string.Empty;
 
     /// <summary>
-    /// The date and time when the user credentials were created.
+    /// The date and time when the user registration were created.
     /// </summary>
     public DateTime CreatedAt { get; init; }
 

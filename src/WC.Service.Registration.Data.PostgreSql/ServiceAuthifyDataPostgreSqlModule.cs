@@ -14,12 +14,12 @@ public class ServiceAuthifyDataPostgreSqlModule : Module
             .AsClosedTypesOf(typeof(IRepository<>))
             .AsImplementedInterfaces();
 
-        builder.RegisterType<UserCredentialDbContextFactory>()
+        builder.RegisterType<UserRegistrationDbContextFactory>()
             .AsSelf()
             .SingleInstance();
-        
-        builder.Register(c => c.Resolve<UserCredentialDbContextFactory>().CreateDbContext())
-            .As<UserCredentialDbContext>()  
+
+        builder.Register(c => c.Resolve<UserRegistrationDbContextFactory>().CreateDbContext())
+            .As<UserRegistrationDbContext>()
             .As<DbContext>()
             .InstancePerLifetimeScope();
     }
