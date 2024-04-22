@@ -6,4 +6,22 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\WC.Service.Registration.Data.Abstractions\WC.Service.Registration.Data.Abstractions.csproj" />
+      <ProjectReference Include="..\WC.Service.Registration.Data.PostgreSql\WC.Service.Registration.Data.PostgreSql.csproj" />
+      <ProjectReference Include="..\WC.Service.Registration.Domain.Abstractions\WC.Service.Registration.Domain.Abstractions.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Autofac" Version="8.0.0" />
+      <PackageReference Include="AutoMapper" Version="13.0.1" />
+      <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+      <PackageReference Include="FluentValidation" Version="11.9.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.1" />
+      <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.5.1" />
+      <PackageReference Include="WC.Library.Domain" Version="1.0.2" />
+    </ItemGroup>
+
 </Project>
