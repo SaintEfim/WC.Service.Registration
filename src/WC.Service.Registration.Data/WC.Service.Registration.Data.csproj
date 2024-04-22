@@ -6,4 +6,15 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Autofac" Version="8.0.0" />
+      <PackageReference Include="WC.Library.Data" Version="1.0.1" />
+      <PackageReference Include="WC.Library.Data.Abstractions" Version="1.0.1" />
+      <PackageReference Include="WC.Library.Data.PostgreSql" Version="1.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\WC.Service.Registration.Data.Abstractions\WC.Service.Registration.Data.Abstractions.csproj" />
+    </ItemGroup>
+
 </Project>

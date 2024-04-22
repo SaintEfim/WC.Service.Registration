@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.Registration.Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.Registration.Data.Abstractions", "src\WC.Service.Registration.Data.Abstractions\WC.Service.Registration.Data.Abstractions.csproj", "{03766FF4-894B-4CFA-BF6E-96030E421FA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.Registration.API", "src\WC.Service.Registration.API\WC.Service.Registration.API.csproj", "{5154F852-10B7-41B2-98FB-D190D358FB12}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.Registration.API", "src\WC.Service.Registration.API\WC.Service.Registration.API.csproj", "{55AB96EE-D96A-4577-BABF-96A5D1038DCE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,9 +44,9 @@ Global
 		{03766FF4-894B-4CFA-BF6E-96030E421FA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03766FF4-894B-4CFA-BF6E-96030E421FA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03766FF4-894B-4CFA-BF6E-96030E421FA8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5154F852-10B7-41B2-98FB-D190D358FB12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5154F852-10B7-41B2-98FB-D190D358FB12}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5154F852-10B7-41B2-98FB-D190D358FB12}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5154F852-10B7-41B2-98FB-D190D358FB12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55AB96EE-D96A-4577-BABF-96A5D1038DCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55AB96EE-D96A-4577-BABF-96A5D1038DCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55AB96EE-D96A-4577-BABF-96A5D1038DCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55AB96EE-D96A-4577-BABF-96A5D1038DCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
