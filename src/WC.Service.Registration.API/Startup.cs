@@ -15,7 +15,7 @@ internal sealed class Startup : StartupBase
         ContainerBuilder builder)
     {
         base.ConfigureContainer(builder);
-        builder.RegisterModule<ServiceAuthifyDomainModule>();
+        builder.RegisterModule<ServiceRegistrationDomainModule>();
 
         builder.RegisterAssemblyTypes(typeof(Program).Assembly)
             .AsClosedTypesOf(typeof(IValidator<>))

@@ -5,7 +5,7 @@ using WC.Service.Registration.Data.PostgreSql.Context;
 
 namespace WC.Service.Registration.Data.PostgreSql;
 
-public class ServiceAuthifyDataPostgreSqlModule : Module
+public class ServiceRegistrationDataPostgreSqlModule : Module
 {
     protected override void Load(
         ContainerBuilder builder)

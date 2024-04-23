@@ -6,12 +6,12 @@ using WC.Service.Registration.Domain.Helpers;
 
 namespace WC.Service.Registration.Domain;
 
-public class ServiceAuthifyDomainModule : Module
+public class ServiceRegistrationDomainModule : Module
 {
     protected override void Load(
         ContainerBuilder builder)
     {
-        builder.RegisterModule<ServiceAuthifyDataPostgreSqlModule>();
+        builder.RegisterModule<ServiceRegistrationDataPostgreSqlModule>();
 
         builder.RegisterAssemblyTypes(ThisAssembly)
             .AsClosedTypesOf(typeof(IDataProvider<>))
