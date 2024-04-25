@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
+using WC.Library.BCryptPasswordHash;
 using WC.Library.Domain.Services;
 using WC.Service.Registration.Data.Models;
 using WC.Service.Registration.Data.Repository;
@@ -15,13 +16,14 @@ public class UserRegistrationManager : DataManagerBase<UserRegistrationManager, 
         UserRegistrationModel, UserRegistrationEntity>,
     IUserRegistrationManager
 {
-    private readonly IHashHelper _hashHelper;
+    private readonly IBCryptPasswordHasher _passwordHasher;
 
     public UserRegistrationManager(IMapper mapper, ILogger<UserRegistrationManager> logger,
         IUserRegistrationRepository repository,
-        IEnumerable<IValidator> validators, IHashHelper hashHelper) : base(mapper, logger, repository, validators)
+        IEnumerable<IValidator> validators, IBCryptPasswordHasher hashHelper) : base(mapper, logger, repository,
+        validators)
     {
-        _hashHelper = hashHelper;
+        _passwordHasher = hashHelper;
     }
 
     public async Task Register(RegistrationRequestModel registrationRequest,
@@ -37,8 +39,7 @@ public class UserRegistrationManager : DataManagerBase<UserRegistrationManager, 
 
         var user = Mapper.Map<UserRegistrationEntity>(registrationRequest);
 
-        user.Email = _hashHelper.Hash(user.Email);
-        user.Password = _hashHelper.Hash(user.Password);
+        user.Password = _passwordHasher.Hash(user.Password);
 
         user.CreatedAt = DateTime.UtcNow;
 
@@ -51,7 +52,7 @@ public class UserRegistrationManager : DataManagerBase<UserRegistrationManager, 
         ArgumentException.ThrowIfNullOrEmpty(email);
 
         var userExists = await Repository.Get(cancellationToken);
-        var user = userExists.SingleOrDefault(u => _hashHelper.Verify(email, u.Email));
+        var user = userExists.SingleOrDefault(x => x.Email == email);
 
         return user;
     }
