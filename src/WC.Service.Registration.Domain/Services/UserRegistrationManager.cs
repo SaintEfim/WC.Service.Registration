@@ -29,8 +29,11 @@ public class UserRegistrationManager : DataManagerBase<UserRegistrationManager, 
         CancellationToken cancellationToken = default)
     {
         Validate(registrationRequest);
-
-        if (await GetUserByEmail(registrationRequest.Email, cancellationToken) != null)
+        
+        var users = await Repository.Get(cancellationToken);
+        var checkUser = users.SingleOrDefault(x => x.Email == registrationRequest.Email);
+        
+        if (checkUser != null)
         {
             throw new DuplicateUserException(
                 $"A user with the same {registrationRequest.Email} address already exists.");
@@ -43,16 +46,5 @@ public class UserRegistrationManager : DataManagerBase<UserRegistrationManager, 
         user.CreatedAt = DateTime.UtcNow;
 
         await Repository.Create(user, cancellationToken);
-    }
-
-    private async Task<UserRegistrationEntity?> GetUserByEmail(string email,
-        CancellationToken cancellationToken = default)
-    {
-        ArgumentException.ThrowIfNullOrEmpty(email);
-
-        var userExists = await Repository.Get(cancellationToken);
-        var user = userExists.SingleOrDefault(x => x.Email == email);
-
-        return user;
     }
 }
