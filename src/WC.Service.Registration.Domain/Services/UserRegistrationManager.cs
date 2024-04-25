@@ -19,10 +19,10 @@ public class UserRegistrationManager : DataManagerBase<UserRegistrationManager, 
 
     public UserRegistrationManager(IMapper mapper, ILogger<UserRegistrationManager> logger,
         IUserRegistrationRepository repository,
-        IEnumerable<IValidator> validators, IBCryptPasswordHasher hashHelper) : base(mapper, logger, repository,
+        IEnumerable<IValidator> validators, IBCryptPasswordHasher passwordHasher) : base(mapper, logger, repository,
         validators)
     {
-        _passwordHasher = hashHelper;
+        _passwordHasher = passwordHasher;
     }
 
     public async Task Register(RegistrationRequestModel registrationRequest,
