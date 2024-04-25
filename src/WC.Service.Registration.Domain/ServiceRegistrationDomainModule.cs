@@ -3,7 +3,6 @@ using FluentValidation;
 using WC.Library.BCryptPasswordHash;
 using WC.Library.Domain.Services;
 using WC.Service.Registration.Data.PostgreSql;
-using WC.Service.Registration.Domain.Helpers;
 
 namespace WC.Service.Registration.Domain;
 
@@ -26,7 +25,6 @@ public class ServiceRegistrationDomainModule : Module
             .AsClosedTypesOf(typeof(IValidator<>))
             .AsImplementedInterfaces();
 
-        builder.RegisterType<JwtHelper>().As<IJwtHelper>().SingleInstance();
         builder.RegisterType<BCryptPasswordHasher>().As<IBCryptPasswordHasher>().SingleInstance();
     }
 }
