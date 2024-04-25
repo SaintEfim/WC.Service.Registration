@@ -29,10 +29,10 @@ public class UserRegistrationManager : DataManagerBase<UserRegistrationManager, 
         CancellationToken cancellationToken = default)
     {
         Validate(registrationRequest);
-        
+
         var users = await Repository.Get(cancellationToken);
         var checkUser = users.SingleOrDefault(x => x.Email == registrationRequest.Email);
-        
+
         if (checkUser != null)
         {
             throw new DuplicateUserException(
