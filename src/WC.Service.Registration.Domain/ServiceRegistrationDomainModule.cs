@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using FluentValidation;
+using WC.Library.BCryptPasswordHash;
 using WC.Library.Domain.Services;
 using WC.Service.Registration.Data.PostgreSql;
 using WC.Service.Registration.Domain.Helpers;
@@ -26,6 +27,6 @@ public class ServiceRegistrationDomainModule : Module
             .AsImplementedInterfaces();
 
         builder.RegisterType<JwtHelper>().As<IJwtHelper>().SingleInstance();
-        builder.RegisterType<HashHelper>().As<IHashHelper>().SingleInstance();
+        builder.RegisterType<BCryptPasswordHasher>().As<IBCryptPasswordHasher>().SingleInstance();
     }
 }
