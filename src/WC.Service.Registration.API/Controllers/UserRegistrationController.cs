@@ -6,7 +6,6 @@ using WC.Library.Web.Controllers;
 using WC.Library.Web.Models;
 using WC.Service.Registration.API.Models;
 using WC.Service.Registration.Domain.Models;
-using WC.Service.Registration.Domain.Models.Requests;
 using WC.Service.Registration.Domain.Services;
 using static Microsoft.AspNetCore.Http.StatusCodes;
 
