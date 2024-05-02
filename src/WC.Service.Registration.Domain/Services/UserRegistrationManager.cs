@@ -7,7 +7,6 @@ using WC.Service.Registration.Data.Models;
 using WC.Service.Registration.Data.Repository;
 using WC.Service.Registration.Domain.Exceptions;
 using WC.Service.Registration.Domain.Models;
-using WC.Service.Registration.Domain.Models.Requests;
 
 namespace WC.Service.Registration.Domain.Services;
 
