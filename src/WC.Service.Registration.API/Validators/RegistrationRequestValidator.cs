@@ -3,9 +3,9 @@ using WC.Service.Registration.API.Models;
 
 namespace WC.Service.Registration.API.Validators;
 
-public class RegistrationRequestNotEmptyValidator : AbstractValidator<RegistrationRequestDto>
+public class RegistrationRequestValidator : AbstractValidator<RegistrationRequestDto>
 {
-    public RegistrationRequestNotEmptyValidator()
+    public RegistrationRequestValidator()
     {
         RuleFor(x => x.Email).NotEmpty();
         RuleFor(x => x.Password).NotEmpty();
