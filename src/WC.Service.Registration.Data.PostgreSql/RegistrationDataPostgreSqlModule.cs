@@ -5,7 +5,7 @@ using WC.Service.Registration.Data.PostgreSql.Context;
 
 namespace WC.Service.Registration.Data.PostgreSql;
 
-public class ServiceRegistrationDataPostgreSqlModule : Module
+public class RegistrationDataPostgreSqlModule : Module
 {
     protected override void Load(
         ContainerBuilder builder)
@@ -14,12 +14,12 @@ public class ServiceRegistrationDataPostgreSqlModule : Module
             .AsClosedTypesOf(typeof(IRepository<>))
             .AsImplementedInterfaces();
 
-        builder.RegisterType<UserRegistrationDbContextFactory>()
+        builder.RegisterType<RegistrationDbContextFactory>()
             .AsSelf()
             .SingleInstance();
 
-        builder.Register(c => c.Resolve<UserRegistrationDbContextFactory>().CreateDbContext())
-            .As<UserRegistrationDbContext>()
+        builder.Register(c => c.Resolve<RegistrationDbContextFactory>().CreateDbContext())
+            .As<RegistrationDbContext>()
             .As<DbContext>()
             .InstancePerLifetimeScope();
     }
