@@ -6,12 +6,12 @@ using WC.Service.Registration.Data.PostgreSql;
 
 namespace WC.Service.Registration.Domain;
 
-public class ServiceRegistrationDomainModule : Module
+public class RegistrationDomainModule : Module
 {
     protected override void Load(
         ContainerBuilder builder)
     {
-        builder.RegisterModule<ServiceRegistrationDataPostgreSqlModule>();
+        builder.RegisterModule<RegistrationDataPostgreSqlModule>();
 
         builder.RegisterAssemblyTypes(ThisAssembly)
             .AsClosedTypesOf(typeof(IDataProvider<>))

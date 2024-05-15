@@ -3,9 +3,9 @@ using WC.Service.Registration.Data.Models;
 
 namespace WC.Service.Registration.Data.PostgreSql.Context;
 
-public sealed class UserRegistrationDbContext : DbContext
+public sealed class RegistrationDbContext : DbContext
 {
-    public UserRegistrationDbContext(DbContextOptions<UserRegistrationDbContext> options) : base(options)
+    public RegistrationDbContext(DbContextOptions<RegistrationDbContext> options) : base(options)
     {
         // Database.Migrate();
     }
