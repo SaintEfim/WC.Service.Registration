@@ -8,9 +8,9 @@
 
     <ItemGroup>
       <PackageReference Include="Autofac" Version="8.0.0" />
-      <PackageReference Include="WC.Library.Data" Version="1.0.1" />
+      <PackageReference Include="WC.Library.Data" Version="1.0.2" />
       <PackageReference Include="WC.Library.Data.Abstractions" Version="1.0.1" />
-      <PackageReference Include="WC.Library.Data.PostgreSql" Version="1.0.0" />
+      <PackageReference Include="WC.Library.Data.PostgreSql" Version="1.0.1" />
     </ItemGroup>
 
     <ItemGroup>
