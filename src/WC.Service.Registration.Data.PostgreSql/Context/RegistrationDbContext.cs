@@ -10,5 +10,5 @@ public sealed class RegistrationDbContext : DbContext
         // Database.Migrate();
     }
 
-    public DbSet<UserRegistrationEntity> UsersCredentials { get; init; } = null!;
+    public DbSet<EmployeeRegistrationEntity> UsersCredentials { get; init; } = null!;
 }

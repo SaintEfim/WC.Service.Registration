@@ -3,7 +3,7 @@ using WC.Service.Registration.Domain.Models;
 
 namespace WC.Service.Registration.Domain.Services;
 
-public interface IUserRegistrationManager : IDataManager<UserRegistrationModel>
+public interface IEmployeeRegistrationManager : IDataManager<EmployeeRegistrationModel>
 {
     Task Register(
         RegistrationRequestModel registrationRequestModel,

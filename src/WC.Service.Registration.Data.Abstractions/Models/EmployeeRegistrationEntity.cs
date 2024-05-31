@@ -2,7 +2,7 @@
 
 namespace WC.Service.Registration.Data.Models;
 
-public class UserRegistrationEntity : EntityBase
+public class EmployeeRegistrationEntity : EntityBase
 {
     public string Email { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;

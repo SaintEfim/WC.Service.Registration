@@ -3,4 +3,4 @@ using WC.Service.Registration.Domain.Models;
 
 namespace WC.Service.Registration.Domain.Services;
 
-public interface IUserRegistrationProvider : IDataProvider<UserRegistrationModel>;
+public interface IEmployeeRegistrationProvider : IDataProvider<EmployeeRegistrationModel>;

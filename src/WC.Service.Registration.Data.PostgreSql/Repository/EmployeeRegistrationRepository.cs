@@ -4,9 +4,9 @@ using WC.Service.Registration.Data.Repository;
 
 namespace WC.Service.Registration.Data.PostgreSql.Repository;
 
-public class UserRegistrationRepository : UserRegistrationRepository<RegistrationDbContext>
+public class EmployeeRegistrationRepository : EmployeeRegistrationRepository<RegistrationDbContext>
 {
-    public UserRegistrationRepository(RegistrationDbContext context, ILogger<UserRegistrationRepository> logger) :
+    public EmployeeRegistrationRepository(RegistrationDbContext context, ILogger<EmployeeRegistrationRepository> logger) :
         base(
             context, logger)
     {

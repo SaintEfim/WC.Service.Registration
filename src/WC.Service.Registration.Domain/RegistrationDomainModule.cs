@@ -3,6 +3,7 @@ using FluentValidation;
 using WC.Library.BCryptPasswordHash;
 using WC.Library.Domain.Services;
 using WC.Service.Registration.Data.PostgreSql;
+using WC.Service.Registration.gRPC.Models;
 
 namespace WC.Service.Registration.Domain;
 

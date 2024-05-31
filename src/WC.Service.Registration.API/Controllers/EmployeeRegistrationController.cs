@@ -12,46 +12,46 @@ using static Microsoft.AspNetCore.Http.StatusCodes;
 namespace WC.Service.Registration.API.Controllers;
 
 /// <summary>
-///     The user type management controller.
+///     The employee type management controller.
 /// </summary>
 [Route("api/[controller]")]
-public class UserRegistrationController : CrudApiControllerBase<UserRegistrationController, IUserRegistrationManager,
-    IUserRegistrationProvider, UserRegistrationModel, UserRegistrationDto>
+public class EmployeeRegistrationController : CrudApiControllerBase<EmployeeRegistrationController, IEmployeeRegistrationManager,
+    IEmployeeRegistrationProvider, EmployeeRegistrationModel, EmployeeRegistrationDto>
 {
     /// <inheritdoc/>
-    public UserRegistrationController(
+    public EmployeeRegistrationController(
         IMapper mapper,
-        ILogger<UserRegistrationController> logger,
+        ILogger<EmployeeRegistrationController> logger,
         IEnumerable<IValidator> validators,
-        IUserRegistrationManager manager,
-        IUserRegistrationProvider provider)
+        IEmployeeRegistrationManager manager,
+        IEmployeeRegistrationProvider provider)
         : base(mapper, logger, validators, manager, provider)
     {
     }
 
     /// <summary>
-    ///     Retrieves a list of user registration.
+    ///     Retrieves a list of employee registration.
     /// </summary>
     /// <param name="cancellationToken">The operation cancellation token.</param>
     [HttpGet]
-    [SwaggerOperation(OperationId = nameof(UserRegistrationGet))]
-    [SwaggerResponse(Status200OK, Type = typeof(List<UserRegistrationDto>))]
-    public async Task<ActionResult<List<UserRegistrationDto>>> UserRegistrationGet(
+    [SwaggerOperation(OperationId = nameof(EmployeeRegistrationGet))]
+    [SwaggerResponse(Status200OK, Type = typeof(List<EmployeeRegistrationDto>))]
+    public async Task<ActionResult<List<EmployeeRegistrationDto>>> EmployeeRegistrationGet(
         CancellationToken cancellationToken = default)
     {
         return Ok(await GetMany(cancellationToken));
     }
 
     /// <summary>
-    ///     Registers a new user registration.
+    ///     Registers a new employee registration.
     /// </summary>
     /// <param name="registrationRequest">The registration request data.</param>
     /// <param name="cancellationToken">The operation cancellation token.</param>
     [HttpPost("register")]
-    [SwaggerOperation(OperationId = nameof(UserRegistrationRegister))]
+    [SwaggerOperation(OperationId = nameof(EmployeeRegistrationRegister))]
     [SwaggerResponse(Status200OK)]
     [SwaggerResponse(Status409Conflict, Type = typeof(ErrorDto))]
-    public async Task<IActionResult> UserRegistrationRegister(RegistrationRequestDto registrationRequest,
+    public async Task<IActionResult> EmployeeRegistrationRegister(RegistrationRequestDto registrationRequest,
         CancellationToken cancellationToken = default)
     {
         Validate(registrationRequest);
@@ -60,17 +60,17 @@ public class UserRegistrationController : CrudApiControllerBase<UserRegistration
     }
 
     /// <summary>
-    ///     Deletes the specified user registration.
+    ///     Deletes the specified employee registration.
     /// </summary>
-    /// <param name="id">The unique identifier of the user registration to delete.</param>
+    /// <param name="id">The unique identifier of the employee registration to delete.</param>
     /// <param name="cancellationToken">The operation cancellation token.</param>
     [HttpDelete("{id:guid}")]
-    [SwaggerOperation(OperationId = nameof(UserRegistrationDelete))]
+    [SwaggerOperation(OperationId = nameof(EmployeeRegistrationDelete))]
     [SwaggerResponse(Status204NoContent)]
     [SwaggerResponse(Status404NotFound, Type = typeof(ErrorDto))]
     [SwaggerResponse(Status400BadRequest, Type = typeof(ErrorDto))]
     [SwaggerResponse(Status409Conflict, Type = typeof(ErrorDto))]
-    public async Task<IActionResult> UserRegistrationDelete(
+    public async Task<IActionResult> EmployeeRegistrationDelete(
         Guid id,
         CancellationToken cancellationToken = default)
     {

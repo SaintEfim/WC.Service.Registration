@@ -8,7 +8,7 @@ public sealed class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<UserRegistrationModel, UserRegistrationDto>();
+        CreateMap<EmployeeRegistrationModel, EmployeeRegistrationDto>();
 
         CreateMap<RegistrationRequestDto, RegistrationRequestModel>();
     }
