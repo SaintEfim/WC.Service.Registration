@@ -1,8 +1,6 @@
-﻿using WC.Service.Registration.gRPC.Models;
+﻿using WC.Library.Data.Repository;
+using WC.Service.Registration.gRPC.Models;
 
 namespace WC.Service.Registration.gRPC.Services;
 
-public interface IEmployeeRegistrationClient
-{
-    Task<string> RegisterEmployeeAsync(EmployeeRegistrationRequestModel user, CancellationToken cancellationToken);
-}
+public interface IEmployeeRegistrationClient : IRepository<EmployeeServiceClientModel>;

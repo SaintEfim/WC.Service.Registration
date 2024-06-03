@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using WC.Service.Registration.Data.Models;
 using WC.Service.Registration.Domain.Models;
 using WC.Service.Registration.gRPC.Models;
 
@@ -9,8 +8,6 @@ public sealed class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<RegistrationRequestModel, EmployeeRegistrationEntity>();
-        CreateMap<EmployeeRegistrationModel, EmployeeRegistrationEntity>().ReverseMap();
-        CreateMap<EmployeeRegistrationEntity, EmployeeRegistrationRequestModel>();
+        CreateMap<EmployeeRegistrationModel, EmployeeServiceClientModel>().ReverseMap();
     }
 }

@@ -8,6 +8,6 @@ public class RegistrationClientModule : Module
     protected override void Load(
         ContainerBuilder builder)
     {
-        builder.RegisterType<EmployeeRegistrationClient>().As<IEmployeeRegistrationClient>().SingleInstance();
+        builder.RegisterType<EmployeeServiceClient>().As<IEmployeeRegistrationClient>().SingleInstance();
     }
 }

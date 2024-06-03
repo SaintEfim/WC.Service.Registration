@@ -7,8 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\WC.Service.Registration.Data.Abstractions\WC.Service.Registration.Data.Abstractions.csproj" />
-      <ProjectReference Include="..\WC.Service.Registration.Data.PostgreSql\WC.Service.Registration.Data.PostgreSql.csproj" />
       <ProjectReference Include="..\WC.Service.Registration.Domain.Abstractions\WC.Service.Registration.Domain.Abstractions.csproj" />
       <ProjectReference Include="..\WC.Service.Registration.gRPC.Client\WC.Service.Registration.gRPC.Client.csproj" />
     </ItemGroup>

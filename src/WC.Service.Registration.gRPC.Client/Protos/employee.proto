@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option csharp_namespace = "WC.Service.Registration.gRPC.Services";
+
+package employee;
+
+import "google/protobuf/empty.proto";
+
+service EmployeeService {
+  rpc Get (google.protobuf.Empty) returns (EmployeeListResponse);
+  rpc Create (Employee) returns (google.protobuf.Empty);
+  rpc GetOneById(EmployeeId) returns (Employee);
+  rpc Update(Employee) returns (google.protobuf.Empty);
+  rpc Delete(EmployeeId) returns (google.protobuf.Empty);
+}
+
+message Employee {
+  string id = 1;
+  string name = 2;
+  string surname = 3;
+  string Patronymic = 4;
+  string email = 5;
+  string password = 6;
+  string Position = 7;
+  string createdAt = 8;
+}
+
+message EmployeeId {
+  string id = 1;
+}
+
+message EmployeeListResponse {
+  repeated Employee employees = 1;
+}
