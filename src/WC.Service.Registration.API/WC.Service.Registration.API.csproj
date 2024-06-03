@@ -24,4 +24,8 @@
       <ProjectReference Include="..\WC.Service.Registration.Domain\WC.Service.Registration.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="logs\" />
+    </ItemGroup>
+
 </Project>

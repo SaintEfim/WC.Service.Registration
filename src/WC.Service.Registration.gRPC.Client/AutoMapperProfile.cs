@@ -9,17 +9,20 @@ public sealed class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<EmployeeServiceClientModel, Employee>()
-            .ForMember(dest => dest.Id,
-                opt => opt.MapFrom(src => src.Id.ToString()))
-            .ForMember(dest => dest.CreatedAt,
-                opt => opt.MapFrom(src => src.CreatedAt.ToString(CultureInfo.InvariantCulture)));
-
         CreateMap<Employee, EmployeeServiceClientModel>()
-            .ForMember(dest => dest.Id,
-                opt => opt.MapFrom(src => Guid.Parse(src.Id)))
             .ForMember(dest => dest.CreatedAt,
-                opt => opt.MapFrom(src => DateTime.ParseExact(src.CreatedAt, "yyyy-MM-ddTHH:mm:ssZ",
-                    CultureInfo.InvariantCulture)));
+                opt => opt.MapFrom(src =>
+                    string.IsNullOrEmpty(src.CreatedAt)
+                        ? DateTime.MinValue
+                        : DateTime.ParseExact(src.CreatedAt, "yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture)));
+
+        CreateMap<EmployeeServiceClientModel, Employee>()
+            .ForMember(dest => dest.CreatedAt,
+                opt => opt.MapFrom(src =>
+                    src.CreatedAt == DateTime.MinValue ? string.Empty : src.CreatedAt.ToString("yyyy-MM-ddTHH:mm:ss")));
+
+        CreateMap<EmployeeListResponse, List<EmployeeServiceClientModel>>()
+            .ConvertUsing((src, _, context) =>
+                context.Mapper.Map<List<EmployeeServiceClientModel>>(src.Employees));
     }
 }

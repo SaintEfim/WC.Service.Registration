@@ -10,12 +10,14 @@ using EmployeeRegistrationModel = WC.Service.Registration.Domain.Models.Employee
 
 namespace WC.Service.Registration.Domain.Services;
 
+/// <summary>
+/// Manages the registration of employees, utilizing a gRPC client instead of a standard repository.
+/// </summary>
 public class EmployeeRegistrationManager : DataManagerBase<EmployeeRegistrationManager, IEmployeeRegistrationClient,
         EmployeeRegistrationModel, EmployeeServiceClientModel>,
     IEmployeeRegistrationManager
 {
     private readonly IBCryptPasswordHasher _passwordHasher;
-    private readonly IEmployeeRegistrationClient _client;
 
     public EmployeeRegistrationManager(IMapper mapper, ILogger<EmployeeRegistrationManager> logger,
         IEmployeeRegistrationClient client,
@@ -23,7 +25,6 @@ public class EmployeeRegistrationManager : DataManagerBase<EmployeeRegistrationM
         validators)
     {
         _passwordHasher = passwordHasher;
-        _client = client;
     }
 
     public async Task Register(EmployeeRegistrationModel model,
@@ -31,7 +32,7 @@ public class EmployeeRegistrationManager : DataManagerBase<EmployeeRegistrationM
     {
         Validate(model);
 
-        var employees = await _client.Get(cancellationToken);
+        var employees = await Repository.Get(cancellationToken);
         var checkEmployee = employees.SingleOrDefault(x => x.Email == model.Email);
 
         if (checkEmployee != null)
@@ -48,6 +49,6 @@ public class EmployeeRegistrationManager : DataManagerBase<EmployeeRegistrationM
 
         employee.CreatedAt = DateTime.UtcNow;
 
-        await _client.Create(employee, cancellationToken);
+        await Repository.Create(employee, cancellationToken);
     }
 }

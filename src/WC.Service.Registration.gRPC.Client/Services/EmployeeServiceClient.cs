@@ -29,22 +29,18 @@ public class EmployeeServiceClient : IEmployeeRegistrationClient
         await _client.CreateAsync(_mapper.Map<Employee>(entity), cancellationToken: cancellationToken);
     }
 
-    public async Task<EmployeeServiceClientModel?> GetOneById(Guid id,
-        CancellationToken cancellationToken)
+    public Task<EmployeeServiceClientModel?> GetOneById(Guid id, CancellationToken cancellationToken)
     {
-        var response = await _client.GetOneByIdAsync(new EmployeeId { Id = id.ToString() },
-            cancellationToken: cancellationToken);
-        return _mapper.Map<EmployeeServiceClientModel>(response);
+        throw new NotImplementedException();
     }
 
-    public async Task Update(EmployeeServiceClientModel entity, CancellationToken cancellationToken)
+    public Task Update(EmployeeServiceClientModel entity, CancellationToken cancellationToken)
     {
-        await _client.UpdateAsync(_mapper.Map<Employee>(entity), cancellationToken: cancellationToken);
+        throw new NotImplementedException();
     }
 
-    public async Task Delete(Guid id, CancellationToken cancellationToken)
+    public Task Delete(Guid id, CancellationToken cancellationToken)
     {
-        await _client.DeleteAsync(new EmployeeId { Id = id.ToString() },
-            cancellationToken: cancellationToken);
+        throw new NotImplementedException();
     }
 }
