@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using Microsoft.Extensions.Logging;
 using WC.Library.BCryptPasswordHash;
-using WC.Library.Domain.Services;
 using WC.Service.Registration.Domain.Exceptions;
 using WC.Service.Registration.gRPC.Models;
 using WC.Service.Registration.gRPC.Services;
@@ -10,20 +8,20 @@ using EmployeeRegistrationModel = WC.Service.Registration.Domain.Models.Employee
 
 namespace WC.Service.Registration.Domain.Services;
 
-/// <summary>
-/// Manages the registration of employees, utilizing a gRPC client instead of a standard repository.
-/// </summary>
-public class EmployeeRegistrationManager : DataManagerBase<EmployeeRegistrationManager, IEmployeeRegistrationClient,
-        EmployeeRegistrationModel, EmployeeServiceClientModel>,
-    IEmployeeRegistrationManager
+public class EmployeeRegistrationManager : IEmployeeRegistrationManager
 {
     private readonly IBCryptPasswordHasher _passwordHasher;
+    private readonly IEnumerable<IValidator> _validators;
+    private readonly IMapper _mapper;
+    private readonly IEmployeeRegistrationClient _client;
 
-    public EmployeeRegistrationManager(IMapper mapper, ILogger<EmployeeRegistrationManager> logger,
+    public EmployeeRegistrationManager(IMapper mapper,
         IEmployeeRegistrationClient client,
-        IEnumerable<IValidator> validators, IBCryptPasswordHasher passwordHasher) : base(mapper, logger, client,
-        validators)
+        IEnumerable<IValidator> validators, IBCryptPasswordHasher passwordHasher)
     {
+        _mapper = mapper;
+        _client = client;
+        _validators = validators;
         _passwordHasher = passwordHasher;
     }
 
@@ -32,7 +30,7 @@ public class EmployeeRegistrationManager : DataManagerBase<EmployeeRegistrationM
     {
         Validate(model);
 
-        var employees = await Repository.Get(cancellationToken);
+        var employees = await _client.Get(cancellationToken);
         var checkEmployee = employees.SingleOrDefault(x => x.Email == model.Email);
 
         if (checkEmployee != null)
@@ -41,7 +39,7 @@ public class EmployeeRegistrationManager : DataManagerBase<EmployeeRegistrationM
                 $"A user with the same {model.Email} address already exists.");
         }
 
-        var employee = Mapper.Map<EmployeeServiceClientModel>(model);
+        var employee = _mapper.Map<EmployeeServiceClientModel>(model);
 
         employee.Id = Guid.NewGuid();
 
@@ -49,6 +47,19 @@ public class EmployeeRegistrationManager : DataManagerBase<EmployeeRegistrationM
 
         employee.CreatedAt = DateTime.UtcNow;
 
-        await Repository.Create(employee, cancellationToken);
+        await _client.Create(employee, cancellationToken);
+    }
+
+    private void Validate<T>(T model)
+    {
+        var errors = _validators.OfType<IValidator<T>>()
+            .Select(validator => validator.Validate(model))
+            .SelectMany(result => result.Errors)
+            .ToList();
+
+        if (errors.Count > 0)
+        {
+            throw new ValidationException(errors);
+        }
     }
 }

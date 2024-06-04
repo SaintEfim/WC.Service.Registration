@@ -1,9 +1,8 @@
-﻿using WC.Library.Domain.Services;
-using WC.Service.Registration.Domain.Models;
+﻿using WC.Service.Registration.Domain.Models;
 
 namespace WC.Service.Registration.Domain.Services;
 
-public interface IEmployeeRegistrationManager : IDataManager<EmployeeRegistrationModel>
+public interface IEmployeeRegistrationManager
 {
     Task Register(
         EmployeeRegistrationModel registrationRequestModel,

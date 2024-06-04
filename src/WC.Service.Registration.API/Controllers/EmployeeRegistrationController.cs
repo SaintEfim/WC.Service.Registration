@@ -15,19 +15,18 @@ namespace WC.Service.Registration.API.Controllers;
 ///     The employee type management controller.
 /// </summary>
 [Route("api/[controller]")]
-public class EmployeeRegistrationController : CrudApiControllerBase<EmployeeRegistrationController,
-    IEmployeeRegistrationManager,
-    IEmployeeRegistrationProvider, EmployeeRegistrationModel, EmployeeRegistrationDto>
+public class EmployeeRegistrationController : ApiControllerBase<EmployeeRegistrationController>
 {
+    private readonly IEmployeeRegistrationManager _manager;
+
     /// <inheritdoc/>
     public EmployeeRegistrationController(
         IMapper mapper,
         ILogger<EmployeeRegistrationController> logger,
-        IEnumerable<IValidator> validators,
-        IEmployeeRegistrationManager manager,
-        IEmployeeRegistrationProvider provider)
-        : base(mapper, logger, validators, manager, provider)
+        IEnumerable<IValidator> validators, IEmployeeRegistrationManager manager)
+        : base(mapper, logger, validators)
     {
+        _manager = manager;
     }
 
     /// <summary>
@@ -43,8 +42,7 @@ public class EmployeeRegistrationController : CrudApiControllerBase<EmployeeRegi
         [FromBody] EmployeeRegistrationDto payload,
         CancellationToken cancellationToken = default)
     {
-        Validate(payload);
-        await Manager.Register(Mapper.Map<EmployeeRegistrationModel>(payload), cancellationToken);
+        await _manager.Register(Mapper.Map<EmployeeRegistrationModel>(payload), cancellationToken);
         return Ok();
     }
 }
