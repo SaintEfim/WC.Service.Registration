@@ -6,5 +6,6 @@ namespace WC.Service.Registration.gRPC.Services;
 public interface IEmployeeRegistrationClient
 {
     Task<List<EmployeeServiceClientModel>> Get(CancellationToken cancellationToken);
+
     Task<Empty> Create(EmployeeServiceClientModel entity, CancellationToken cancellationToken);
 }
