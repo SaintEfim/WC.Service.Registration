@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using WC.Library.Web.Controllers;
@@ -22,9 +21,8 @@ public class EmployeeRegistrationController : ApiControllerBase<EmployeeRegistra
     /// <inheritdoc/>
     public EmployeeRegistrationController(
         IMapper mapper,
-        ILogger<EmployeeRegistrationController> logger,
-        IEnumerable<IValidator> validators, IEmployeeRegistrationManager manager)
-        : base(mapper, logger, validators)
+        ILogger<EmployeeRegistrationController> logger, IEmployeeRegistrationManager manager)
+        : base(mapper, logger)
     {
         _manager = manager;
     }
@@ -42,7 +40,6 @@ public class EmployeeRegistrationController : ApiControllerBase<EmployeeRegistra
         [FromBody] EmployeeRegistrationDto payload,
         CancellationToken cancellationToken = default)
     {
-        await _manager.Register(Mapper.Map<EmployeeRegistrationModel>(payload), cancellationToken);
-        return Ok();
+        return Ok(await _manager.Register(Mapper.Map<EmployeeRegistrationModel>(payload), cancellationToken));
     }
 }

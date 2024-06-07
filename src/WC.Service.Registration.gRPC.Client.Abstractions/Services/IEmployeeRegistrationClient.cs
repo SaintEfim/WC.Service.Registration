@@ -7,5 +7,5 @@ public interface IEmployeeRegistrationClient
 {
     Task<List<EmployeeServiceClientModel>> Get(CancellationToken cancellationToken);
 
-    Task<Empty> Create(EmployeeServiceClientModel entity, CancellationToken cancellationToken);
+    Task<Guid> Create(EmployeeServiceClientModel entity, CancellationToken cancellationToken);
 }

@@ -24,8 +24,9 @@ public class EmployeeServiceClient : IEmployeeRegistrationClient
         return _mapper.Map<List<EmployeeServiceClientModel>>(responses);
     }
 
-    public async Task<Empty> Create(EmployeeServiceClientModel entity, CancellationToken cancellationToken)
+    public async Task<Guid> Create(EmployeeServiceClientModel entity, CancellationToken cancellationToken)
     {
-        return await _client.CreateAsync(_mapper.Map<Employee>(entity), cancellationToken: cancellationToken);
+        var res =  await _client.CreateAsync(_mapper.Map<Employee>(entity), cancellationToken: cancellationToken);
+        return Guid.Parse(res.Id);
     }
 }

@@ -8,7 +8,7 @@ import "google/protobuf/empty.proto";
 
 service EmployeeService {
   rpc Get (google.protobuf.Empty) returns (EmployeeListResponse);
-  rpc Create (Employee) returns (google.protobuf.Empty);
+  rpc Create (Employee) returns (CreateResult);
 }
 
 message Employee {
@@ -24,4 +24,8 @@ message Employee {
 
 message EmployeeListResponse {
   repeated Employee employees = 1;
+}
+
+message CreateResult {
+  string id = 1;
 }

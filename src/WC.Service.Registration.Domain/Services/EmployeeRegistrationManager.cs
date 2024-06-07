@@ -25,7 +25,7 @@ public class EmployeeRegistrationManager : IEmployeeRegistrationManager
         _passwordHasher = passwordHasher;
     }
 
-    public async Task Register(EmployeeRegistrationModel model,
+    public async Task<Guid> Register(EmployeeRegistrationModel model,
         CancellationToken cancellationToken = default)
     {
         Validate(model);
@@ -47,7 +47,7 @@ public class EmployeeRegistrationManager : IEmployeeRegistrationManager
 
         employee.CreatedAt = DateTime.UtcNow;
 
-        await _client.Create(employee, cancellationToken);
+        return await _client.Create(employee, cancellationToken);
     }
 
     private void Validate<T>(T model)
