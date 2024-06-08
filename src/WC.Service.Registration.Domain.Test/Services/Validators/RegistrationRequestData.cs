@@ -1,6 +1,6 @@
 ﻿// using WC.Service.Registration.Domain.Models;
 //
-// namespace WC.Service.Registration.Domain.Test.Services.Validators;
+// namespace WC.Service.Registration.Domain.Test.GrpcClients.Validators;
 //
 // public static class RegistrationRequestData
 // {

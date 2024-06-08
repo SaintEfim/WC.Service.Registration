@@ -25,7 +25,7 @@ public class EmployeeRegistrationManager : IEmployeeRegistrationManager
         _passwordHasher = passwordHasher;
     }
 
-    public async Task<Guid> Register(EmployeeRegistrationModel model,
+    public async Task<EmployeeRegistrationModel> Register(EmployeeRegistrationModel model,
         CancellationToken cancellationToken = default)
     {
         Validate(model);
@@ -39,15 +39,15 @@ public class EmployeeRegistrationManager : IEmployeeRegistrationManager
                 $"A user with the same {model.Email} address already exists.");
         }
 
-        var employee = _mapper.Map<EmployeeServiceClientModel>(model);
+        var employee = _mapper.Map<EmployeeRegistrationClientModel>(model);
 
         employee.Id = Guid.NewGuid();
 
         employee.Password = _passwordHasher.Hash(employee.Password);
 
-        employee.CreatedAt = DateTime.UtcNow;
+        var createResult = await _client.Create(employee, cancellationToken);
 
-        return await _client.Create(employee, cancellationToken);
+        return _mapper.Map<EmployeeRegistrationModel>(createResult);
     }
 
     private void Validate<T>(T model)

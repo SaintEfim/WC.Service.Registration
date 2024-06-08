@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-option csharp_namespace = "WC.Service.Registration.gRPC.Services";
+option csharp_namespace = "WC.Service.Registration.gRPC.GrpcClients";
 
-package employee;
+package employee_registration;
 
 import "google/protobuf/empty.proto";
 
@@ -19,7 +19,6 @@ message Employee {
   string email = 5;
   string password = 6;
   string Position = 7;
-  string createdAt = 8;
 }
 
 message EmployeeListResponse {

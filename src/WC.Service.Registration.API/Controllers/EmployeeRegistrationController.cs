@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
+using NSwag.Annotations;
 using WC.Library.Web.Controllers;
 using WC.Library.Web.Models;
 using WC.Service.Registration.API.Models;
@@ -17,6 +17,7 @@ namespace WC.Service.Registration.API.Controllers;
 public class EmployeeRegistrationController : ApiControllerBase<EmployeeRegistrationController>
 {
     private readonly IEmployeeRegistrationManager _manager;
+    private readonly IMapper _mapper;
 
     /// <inheritdoc/>
     public EmployeeRegistrationController(
@@ -24,6 +25,7 @@ public class EmployeeRegistrationController : ApiControllerBase<EmployeeRegistra
         ILogger<EmployeeRegistrationController> logger, IEmployeeRegistrationManager manager)
         : base(mapper, logger)
     {
+        _mapper = mapper;
         _manager = manager;
     }
 
@@ -33,13 +35,17 @@ public class EmployeeRegistrationController : ApiControllerBase<EmployeeRegistra
     /// <param name="payload">The registration request data.</param>
     /// <param name="cancellationToken">The operation cancellation token.</param>
     [HttpPost("register")]
-    [SwaggerOperation(OperationId = nameof(EmployeeRegistrationRegister))]
-    [SwaggerResponse(Status200OK)]
-    [SwaggerResponse(Status409Conflict, Type = typeof(ErrorDto))]
+    [OpenApiOperation(nameof(EmployeeRegistrationRegister))]
+    [SwaggerResponse(Status201Created, typeof(CreateActionResultDto))]
+    [SwaggerResponse(Status409Conflict, typeof(ErrorDto))]
     public async Task<IActionResult> EmployeeRegistrationRegister(
         [FromBody] EmployeeRegistrationDto payload,
         CancellationToken cancellationToken = default)
     {
-        return Ok(await _manager.Register(Mapper.Map<EmployeeRegistrationModel>(payload), cancellationToken));
+        var createResult = _mapper.Map<CreateActionResultDto>(
+            await _manager.Register(Mapper.Map<EmployeeRegistrationModel>(payload), cancellationToken));
+
+        return CreatedAtAction(nameof(EmployeeRegistrationRegister), new { id = createResult.Id },
+            _mapper.Map<CreateActionResultDto>(createResult));
     }
 }

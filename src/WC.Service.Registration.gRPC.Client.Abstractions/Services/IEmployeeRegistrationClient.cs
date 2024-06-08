@@ -1,11 +1,10 @@
-﻿using Google.Protobuf.WellKnownTypes;
-using WC.Service.Registration.gRPC.Models;
+﻿using WC.Service.Registration.gRPC.Models;
 
 namespace WC.Service.Registration.gRPC.Services;
 
 public interface IEmployeeRegistrationClient
 {
-    Task<List<EmployeeServiceClientModel>> Get(CancellationToken cancellationToken);
+    Task<List<EmployeeRegistrationClientModel>> Get(CancellationToken cancellationToken);
 
-    Task<Guid> Create(EmployeeServiceClientModel entity, CancellationToken cancellationToken);
+    Task<CreateResultModel> Create(EmployeeRegistrationClientModel entity, CancellationToken cancellationToken);
 }

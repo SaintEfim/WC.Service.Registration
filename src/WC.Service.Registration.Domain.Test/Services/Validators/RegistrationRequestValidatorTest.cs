@@ -1,8 +1,8 @@
 ﻿// using System.Globalization;
 // using FluentValidation.TestHelper;
-// using WC.Service.Registration.Domain.Services.Validators;
+// using WC.Service.Registration.Domain.GrpcClients.Validators;
 //
-// namespace WC.Service.Registration.Domain.Test.Services.Validators;
+// namespace WC.Service.Registration.Domain.Test.GrpcClients.Validators;
 //
 // public class RegistrationRequestValidatorTest
 // {

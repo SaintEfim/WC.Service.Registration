@@ -4,7 +4,7 @@ namespace WC.Service.Registration.Domain.Services;
 
 public interface IEmployeeRegistrationManager
 {
-    Task<Guid> Register(
+    Task<EmployeeRegistrationModel> Register(
         EmployeeRegistrationModel registrationRequestModel,
         CancellationToken cancellationToken = default);
 }

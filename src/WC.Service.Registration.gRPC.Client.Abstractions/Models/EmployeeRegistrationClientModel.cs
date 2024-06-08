@@ -1,6 +1,6 @@
 ﻿namespace WC.Service.Registration.gRPC.Models;
 
-public class EmployeeServiceClientModel
+public class EmployeeRegistrationClientModel
 {
     public Guid Id { get; set; }
 
@@ -15,6 +15,4 @@ public class EmployeeServiceClientModel
     public string Password { get; set; } = string.Empty;
 
     public string Position { get; set; } = string.Empty;
-
-    public DateTime CreatedAt { get; set; }
 }

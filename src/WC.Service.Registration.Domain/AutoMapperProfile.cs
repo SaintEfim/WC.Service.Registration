@@ -8,6 +8,7 @@ public sealed class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<EmployeeRegistrationModel, EmployeeServiceClientModel>().ReverseMap();
+        CreateMap<EmployeeRegistrationModel, EmployeeRegistrationClientModel>().ReverseMap();
+        CreateMap<CreateResultModel, EmployeeRegistrationModel>();
     }
 }
