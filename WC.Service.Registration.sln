@@ -10,17 +10,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.Registration.Dom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.Registration.Domain.Abstractions", "src\WC.Service.Registration.Domain.Abstractions\WC.Service.Registration.Domain.Abstractions.csproj", "{01D535C6-A843-4AF2-B068-06EB86FF7430}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.Registration.Data", "src\WC.Service.Registration.Data\WC.Service.Registration.Data.csproj", "{A49D670C-AB17-48B2-B412-86F26690C377}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.Registration.Data.PostgreSql", "src\WC.Service.Registration.Data.PostgreSql\WC.Service.Registration.Data.PostgreSql.csproj", "{E856CA76-F4F8-44DF-873B-99807203908A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.Registration.Data.Abstractions", "src\WC.Service.Registration.Data.Abstractions\WC.Service.Registration.Data.Abstractions.csproj", "{03766FF4-894B-4CFA-BF6E-96030E421FA8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.Registration.API", "src\WC.Service.Registration.API\WC.Service.Registration.API.csproj", "{55AB96EE-D96A-4577-BABF-96A5D1038DCE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{D17F8818-E3D1-4ED2-9702-8DDB690F86C5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.Registration.Domain.Test", "src\WC.Service.Registration.Domain.Test\WC.Service.Registration.Domain.Test.csproj", "{8624ED67-A73F-48D0-9749-62B2F648CAAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.Registration.gRPC.Client", "src\WC.Service.Registration.gRPC.Client\WC.Service.Registration.gRPC.Client.csproj", "{8FD751BA-8765-4430-8E42-BCB84E7643BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.Registration.gRPC.Client.Abstractions", "src\WC.Service.Registration.gRPC.Client.Abstractions\WC.Service.Registration.gRPC.Client.Abstractions.csproj", "{40F129AA-8CFF-4FC0-B570-2C2BDAF1BA08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,18 +34,6 @@ Global
 		{01D535C6-A843-4AF2-B068-06EB86FF7430}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01D535C6-A843-4AF2-B068-06EB86FF7430}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01D535C6-A843-4AF2-B068-06EB86FF7430}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A49D670C-AB17-48B2-B412-86F26690C377}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A49D670C-AB17-48B2-B412-86F26690C377}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A49D670C-AB17-48B2-B412-86F26690C377}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A49D670C-AB17-48B2-B412-86F26690C377}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E856CA76-F4F8-44DF-873B-99807203908A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E856CA76-F4F8-44DF-873B-99807203908A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E856CA76-F4F8-44DF-873B-99807203908A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E856CA76-F4F8-44DF-873B-99807203908A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{03766FF4-894B-4CFA-BF6E-96030E421FA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{03766FF4-894B-4CFA-BF6E-96030E421FA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{03766FF4-894B-4CFA-BF6E-96030E421FA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{03766FF4-894B-4CFA-BF6E-96030E421FA8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{55AB96EE-D96A-4577-BABF-96A5D1038DCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{55AB96EE-D96A-4577-BABF-96A5D1038DCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55AB96EE-D96A-4577-BABF-96A5D1038DCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -56,6 +42,14 @@ Global
 		{8624ED67-A73F-48D0-9749-62B2F648CAAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8624ED67-A73F-48D0-9749-62B2F648CAAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8624ED67-A73F-48D0-9749-62B2F648CAAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FD751BA-8765-4430-8E42-BCB84E7643BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FD751BA-8765-4430-8E42-BCB84E7643BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FD751BA-8765-4430-8E42-BCB84E7643BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FD751BA-8765-4430-8E42-BCB84E7643BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40F129AA-8CFF-4FC0-B570-2C2BDAF1BA08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40F129AA-8CFF-4FC0-B570-2C2BDAF1BA08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40F129AA-8CFF-4FC0-B570-2C2BDAF1BA08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40F129AA-8CFF-4FC0-B570-2C2BDAF1BA08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8624ED67-A73F-48D0-9749-62B2F648CAAE} = {D17F8818-E3D1-4ED2-9702-8DDB690F86C5}

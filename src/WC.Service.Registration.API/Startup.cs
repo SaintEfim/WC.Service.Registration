@@ -1,6 +1,6 @@
 ﻿using Autofac;
-using FluentValidation;
 using WC.Service.Registration.Domain;
+using WC.Service.Registration.gRPC;
 using StartupBase = WC.Library.Web.Startup.StartupBase;
 
 namespace WC.Service.Registration.API;
@@ -16,9 +16,6 @@ internal sealed class Startup : StartupBase
     {
         base.ConfigureContainer(builder);
         builder.RegisterModule<RegistrationDomainModule>();
-
-        builder.RegisterAssemblyTypes(typeof(Program).Assembly)
-            .AsClosedTypesOf(typeof(IValidator<>))
-            .AsImplementedInterfaces();
+        builder.RegisterModule<RegistrationClientModule>();
     }
 }

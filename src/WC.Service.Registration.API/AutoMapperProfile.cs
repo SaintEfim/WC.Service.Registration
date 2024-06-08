@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using WC.Library.Web.Models;
 using WC.Service.Registration.API.Models;
 using WC.Service.Registration.Domain.Models;
 
@@ -8,8 +9,7 @@ public sealed class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<UserRegistrationModel, UserRegistrationDto>();
-
-        CreateMap<RegistrationRequestDto, RegistrationRequestModel>();
+        CreateMap<EmployeeRegistrationDto, EmployeeRegistrationModel>();
+        CreateMap<EmployeeRegistrationModel, CreateActionResultDto>();
     }
 }
