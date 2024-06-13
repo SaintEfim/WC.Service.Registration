@@ -12,7 +12,7 @@ public class EmployeeRegistrationClientManager : IEmployeeRegistrationClientMana
 
     public EmployeeRegistrationClientManager(IConfiguration config, IMapper mapper)
     {
-        var channel = GrpcChannel.ForAddress(config.GetValue<string>("GrpcSettings:EmployeeServiceUrl")!);
+        var channel = GrpcChannel.ForAddress(config.GetValue<string>("EmployeeService:url")!);
         _client = new EmployeeService.EmployeeServiceClient(channel);
         _mapper = mapper;
     }

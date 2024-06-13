@@ -13,7 +13,10 @@ public class EmployeeRegistrationClientProvider : IEmployeeRegistrationClientPro
 
     public EmployeeRegistrationClientProvider(IConfiguration config, IMapper mapper)
     {
-        var channel = GrpcChannel.ForAddress(config.GetValue<string>("GrpcSettings:EmployeeServiceUrl")!);
+        var channel = GrpcChannel.ForAddress(config.GetValue<string>("EmployeeService:url") ??
+                                             throw new InvalidOperationException(
+                                                 "Employee REST API service URL must be specified"));
+
         _client = new EmployeeService.EmployeeServiceClient(channel);
         _mapper = mapper;
     }

@@ -3,7 +3,7 @@
 /// <summary>
 /// The person responsible for some object processing or the one who is currently executing some task.
 /// </summary>
-public class EmployeeRegistrationDto
+public class EmployeeRegistrationCreateDto
 {
     /// <summary>
     /// The first name of the employee.
