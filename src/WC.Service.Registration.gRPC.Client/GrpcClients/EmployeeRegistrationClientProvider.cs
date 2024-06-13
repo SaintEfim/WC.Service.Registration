@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Net.Client;
-using Microsoft.Extensions.Configuration;
 using WC.Service.Registration.gRPC.Models;
 
 namespace WC.Service.Registration.gRPC.GrpcClients;
@@ -11,11 +10,9 @@ public class EmployeeRegistrationClientProvider : IEmployeeRegistrationClientPro
     private readonly EmployeeService.EmployeeServiceClient _client;
     private readonly IMapper _mapper;
 
-    public EmployeeRegistrationClientProvider(IConfiguration config, IMapper mapper)
+    public EmployeeRegistrationClientProvider(EmployeeClientConfiguration clientConfiguration, IMapper mapper)
     {
-        var channel = GrpcChannel.ForAddress(config.GetValue<string>("EmployeeService:url") ??
-                                             throw new InvalidOperationException(
-                                                 "Employee REST API service URL must be specified"));
+        var channel = GrpcChannel.ForAddress(clientConfiguration.GetBaseUrl());
         _client = new EmployeeService.EmployeeServiceClient(channel);
         _mapper = mapper;
     }

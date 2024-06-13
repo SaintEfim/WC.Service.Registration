@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Grpc.Net.Client;
-using Microsoft.Extensions.Configuration;
 using WC.Service.Registration.gRPC.Models;
 
 namespace WC.Service.Registration.gRPC.GrpcClients;
@@ -10,11 +9,9 @@ public class EmployeeRegistrationClientManager : IEmployeeRegistrationClientMana
     private readonly EmployeeService.EmployeeServiceClient _client;
     private readonly IMapper _mapper;
 
-    public EmployeeRegistrationClientManager(IConfiguration config, IMapper mapper)
+    public EmployeeRegistrationClientManager(IMapper mapper, EmployeeClientConfiguration clientConfiguration)
     {
-        var channel = GrpcChannel.ForAddress(config.GetValue<string>("EmployeeService:url") ??
-                                             throw new InvalidOperationException(
-                                                 "Employee REST API service URL must be specified"));
+        var channel = GrpcChannel.ForAddress(clientConfiguration.GetBaseUrl());
         _client = new EmployeeService.EmployeeServiceClient(channel);
         _mapper = mapper;
     }
