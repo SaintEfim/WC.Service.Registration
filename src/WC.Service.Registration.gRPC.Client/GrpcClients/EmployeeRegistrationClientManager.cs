@@ -12,11 +12,13 @@ public class EmployeeRegistrationClientManager : IEmployeeRegistrationClientMana
 
     public EmployeeRegistrationClientManager(IConfiguration config, IMapper mapper)
     {
-        var channel = GrpcChannel.ForAddress(config.GetValue<string>("EmployeeService:url")!);
+        var channel = GrpcChannel.ForAddress(config.GetValue<string>("EmployeeService:url") ??
+                                             throw new InvalidOperationException(
+                                                 "Employee REST API service URL must be specified"));
         _client = new EmployeeService.EmployeeServiceClient(channel);
         _mapper = mapper;
     }
-    
+
     public async Task<CreateResultModel> Create(EmployeeRegistrationClientModel entity,
         CancellationToken cancellationToken)
     {
