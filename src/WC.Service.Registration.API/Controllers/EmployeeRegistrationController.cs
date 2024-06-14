@@ -30,22 +30,22 @@ public class EmployeeRegistrationController : ApiControllerBase<EmployeeRegistra
     }
 
     /// <summary>
-    ///     Registers a new employee registration.
+    ///     Creates a new employee registration.
     /// </summary>
     /// <param name="payload">The registration request data.</param>
     /// <param name="cancellationToken">The operation cancellation token.</param>
     [HttpPost("register")]
-    [OpenApiOperation(nameof(EmployeeRegistrationRegister))]
+    [OpenApiOperation(nameof(RegisterEmployee))]
     [SwaggerResponse(Status201Created, typeof(CreateActionResultDto))]
     [SwaggerResponse(Status409Conflict, typeof(ErrorDto))]
-    public async Task<IActionResult> EmployeeRegistrationRegister(
+    public async Task<IActionResult> RegisterEmployee(
         [FromBody] EmployeeRegistrationCreateDto payload,
         CancellationToken cancellationToken = default)
     {
         var createResult = _mapper.Map<CreateActionResultDto>(
             await _manager.Register(Mapper.Map<EmployeeRegistrationModel>(payload), cancellationToken));
 
-        return CreatedAtAction(nameof(EmployeeRegistrationRegister), new { id = createResult.Id },
+        return CreatedAtAction(nameof(RegisterEmployee), new { id = createResult.Id },
             _mapper.Map<CreateActionResultDto>(createResult));
     }
 }

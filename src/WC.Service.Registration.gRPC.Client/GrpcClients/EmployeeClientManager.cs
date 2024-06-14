@@ -1,22 +1,25 @@
 ﻿using AutoMapper;
+using Grpc.Core;
 using Grpc.Net.Client;
+using WC.Service.Registration.Domain;
 using WC.Service.Registration.gRPC.Models;
 
 namespace WC.Service.Registration.gRPC.GrpcClients;
 
-public class EmployeeRegistrationClientManager : IEmployeeRegistrationClientManager
+public class EmployeeClientManager : IEmployeeClientManager
 {
     private readonly EmployeeService.EmployeeServiceClient _client;
     private readonly IMapper _mapper;
 
-    public EmployeeRegistrationClientManager(IMapper mapper, EmployeeClientConfiguration clientConfiguration)
+    public EmployeeClientManager(IMapper mapper, IEmployeeClientConfiguration configuration)
     {
-        var channel = GrpcChannel.ForAddress(clientConfiguration.GetBaseUrl());
-        _client = new EmployeeService.EmployeeServiceClient(channel);
         _mapper = mapper;
+
+        var channel = GrpcChannel.ForAddress(configuration.GetBaseUrl());
+        _client = new EmployeeService.EmployeeServiceClient(channel);
     }
 
-    public async Task<CreateResultModel> Create(EmployeeRegistrationClientModel entity,
+    public async Task<CreateResultModel> Create(EmployeeCreateModel entity,
         CancellationToken cancellationToken)
     {
         var createResult =

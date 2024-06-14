@@ -13,12 +13,12 @@ public class EmployeeRegistrationManager : IEmployeeRegistrationManager
     private readonly IBCryptPasswordHasher _passwordHasher;
     private readonly IEnumerable<IValidator> _validators;
     private readonly IMapper _mapper;
-    private readonly IEmployeeRegistrationClientManager _clientManager;
-    private readonly IEmployeeRegistrationClientProvider _clientProvider;
+    private readonly IEmployeeClientManager _clientManager;
+    private readonly IEmployeeClientProvider _clientProvider;
 
     public EmployeeRegistrationManager(IMapper mapper,
         IEnumerable<IValidator> validators, IBCryptPasswordHasher passwordHasher,
-        IEmployeeRegistrationClientManager clientManager, IEmployeeRegistrationClientProvider clientProvider)
+        IEmployeeClientManager clientManager, IEmployeeClientProvider clientProvider)
     {
         _mapper = mapper;
         _validators = validators;
@@ -41,7 +41,7 @@ public class EmployeeRegistrationManager : IEmployeeRegistrationManager
                 $"A user with the same {model.Email} address already exists.");
         }
 
-        var employee = _mapper.Map<EmployeeRegistrationClientModel>(model);
+        var employee = _mapper.Map<EmployeeCreateModel>(model);
 
         employee.Id = Guid.NewGuid();
 

@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace WC.Service.Registration.gRPC;
+namespace WC.Service.Registration.Domain;
 
-public class EmployeeClientConfiguration
+public class EmployeeClientConfiguration : IEmployeeClientConfiguration
 {
     private readonly Lazy<string> _baseUrl;
 

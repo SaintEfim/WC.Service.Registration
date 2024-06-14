@@ -19,6 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\WC.Service.Registration.Domain.Abstractions\WC.Service.Registration.Domain.Abstractions.csproj" />
       <ProjectReference Include="..\WC.Service.Registration.gRPC.Client.Abstractions\WC.Service.Registration.gRPC.Client.Abstractions.csproj" />
     </ItemGroup>
 

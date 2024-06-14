@@ -18,6 +18,12 @@ public class RegistrationDomainModule : Module
             .AsClosedTypesOf(typeof(IValidator<>))
             .AsImplementedInterfaces();
 
-        builder.RegisterType<BCryptPasswordHasher>().As<IBCryptPasswordHasher>().SingleInstance();
+        builder.RegisterType<EmployeeClientConfiguration>()
+            .As<IEmployeeClientConfiguration>()
+            .InstancePerLifetimeScope();
+
+        builder.RegisterType<BCryptPasswordHasher>()
+            .As<IBCryptPasswordHasher>()
+            .InstancePerLifetimeScope();
     }
 }

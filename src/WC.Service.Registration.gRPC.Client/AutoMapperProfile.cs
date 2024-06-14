@@ -8,13 +8,13 @@ public sealed class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<Employee, EmployeeRegistrationClientModel>();
+        CreateMap<Employee, EmployeeCreateModel>();
 
-        CreateMap<EmployeeRegistrationClientModel, Employee>();
+        CreateMap<EmployeeCreateModel, Employee>();
 
-        CreateMap<EmployeeListResponse, List<EmployeeRegistrationClientModel>>()
+        CreateMap<EmployeeListResponse, List<EmployeeCreateModel>>()
             .ConvertUsing((src, _, context) =>
-                context.Mapper.Map<List<EmployeeRegistrationClientModel>>(src.Employees));
+                context.Mapper.Map<List<EmployeeCreateModel>>(src.Employees));
 
         CreateMap<CreateResult, CreateResultModel>();
     }
