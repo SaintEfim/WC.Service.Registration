@@ -9,6 +9,6 @@ public class RegistrationClientModule : Module
         ContainerBuilder builder)
     {
         builder.RegisterType<EmployeeClientManager>().As<IEmployeeClientManager>().SingleInstance();
-        builder.RegisterType<EmployeeClientProvider>().As<IEmployeeClientProvider>().SingleInstance();
+        // builder.RegisterType<EmployeeClientProvider>().As<IEmployeeClientProvider>().SingleInstance();
     }
 }

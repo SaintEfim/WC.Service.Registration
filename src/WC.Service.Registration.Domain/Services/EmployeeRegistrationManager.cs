@@ -14,17 +14,16 @@ public class EmployeeRegistrationManager : IEmployeeRegistrationManager
     private readonly IEnumerable<IValidator> _validators;
     private readonly IMapper _mapper;
     private readonly IEmployeeClientManager _clientManager;
-    private readonly IEmployeeClientProvider _clientProvider;
+    // private readonly IEmployeeClientProvider _clientProvider;
 
     public EmployeeRegistrationManager(IMapper mapper,
         IEnumerable<IValidator> validators, IBCryptPasswordHasher passwordHasher,
-        IEmployeeClientManager clientManager, IEmployeeClientProvider clientProvider)
+        IEmployeeClientManager clientManager)
     {
         _mapper = mapper;
         _validators = validators;
         _passwordHasher = passwordHasher;
         _clientManager = clientManager;
-        _clientProvider = clientProvider;
     }
 
     public async Task<EmployeeRegistrationModel> Register(EmployeeRegistrationModel model,
@@ -32,21 +31,20 @@ public class EmployeeRegistrationManager : IEmployeeRegistrationManager
     {
         Validate(model);
 
-        var employees = await _clientProvider.Get(cancellationToken);
-        var checkEmployee = employees.SingleOrDefault(x => x.Email == model.Email);
-
-        if (checkEmployee != null)
-        {
-            throw new DuplicateEmployeeException(
-                $"A user with the same {model.Email} address already exists.");
-        }
+        // var employees = await _clientProvider.Get(cancellationToken);
+        // var checkEmployee = employees.SingleOrDefault(x => x.Email == model.Email);
+        //
+        // if (checkEmployee != null)
+        // {
+        //     throw new DuplicateEmployeeException(
+        //         $"A user with the same {model.Email} address already exists.");
+        // }
 
         var employee = _mapper.Map<EmployeeCreateModel>(model);
 
         employee.Id = Guid.NewGuid();
-
         employee.Password = _passwordHasher.Hash(employee.Password);
-
+        
         var createResult = await _clientManager.Create(employee, cancellationToken);
 
         return _mapper.Map<EmployeeRegistrationModel>(createResult);
