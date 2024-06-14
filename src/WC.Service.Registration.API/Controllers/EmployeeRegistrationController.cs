@@ -13,7 +13,7 @@ namespace WC.Service.Registration.API.Controllers;
 /// <summary>
 ///     The employee type management controller.
 /// </summary>
-[Route("api/[controller]")]
+[Route("api/v1/employee-registration")]
 public class EmployeeRegistrationController : ApiControllerBase<EmployeeRegistrationController>
 {
     private readonly IEmployeeRegistrationManager _manager;
