@@ -8,7 +8,7 @@ public sealed class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<EmployeeRegistrationModel, EmployeeCreateModel>().ReverseMap();
-        CreateMap<CreateResultModel, EmployeeRegistrationModel>();
+        CreateMap<EmployeeRegistrationModel, EmployeeCreateModel>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Guid.NewGuid()));
     }
 }

@@ -1,36 +1,36 @@
-﻿// using System.Globalization;
-// using FluentValidation.TestHelper;
-// using WC.Service.Registration.Domain.GrpcClients.Validators;
-//
-// namespace WC.Service.Registration.Domain.Test.GrpcClients.Validators;
-//
-// public class RegistrationRequestValidatorTest
-// {
-//     private readonly RegistrationRequestValidator _validator = new();
-//
-//     public RegistrationRequestValidatorTest()
-//     {
-//         Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en");
-//     }
-//
-//     [Fact]
-//     public void RegistrationRequest_Positive_Create_New_Record()
-//     {
-//         var res = _validator.TestValidate(RegistrationRequestData.RegistrationRequestModel());
-//         res.ShouldNotHaveAnyValidationErrors();
-//     }
-//
-//     [Fact]
-//     public void RegistrationRequest_Negative_Create_New_Record_With_Empty_Email()
-//     {
-//         var model = RegistrationRequestData.RegistrationRequestModel();
-//         model.Email = string.Empty;
-//         var res = _validator.TestValidate(model);
-//         res.ShouldHaveAnyValidationError()
-//             .WithErrorMessage("'Email' must not be empty.")
-//             .Only();
-//     }
-//
+﻿using System.Globalization;
+using FluentValidation.TestHelper;
+using WC.Service.Registration.Domain.Services.Validators;
+
+namespace WC.Service.Registration.Domain.Test.Services.Validators;
+
+public class EmployeeRegistrationModelValidatorTest
+{
+    private readonly EmployeeRegistrationModelValidator _validator = new();
+
+    public EmployeeRegistrationModelValidatorTest()
+    {
+        Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en");
+    }
+
+    [Fact]
+    public void RegistrationRequest_Positive_Create_New_Record()
+    {
+        var res = _validator.TestValidate(EmployeeRegistrationData.EmployeeRegistrationModel());
+        res.ShouldNotHaveAnyValidationErrors();
+    }
+
+    [Fact]
+    public void RegistrationRequest_Negative_Create_New_Record_With_Empty_Email()
+    {
+        var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+        model.Email = string.Empty;
+        var res = _validator.TestValidate(model);
+        res.ShouldHaveAnyValidationError()
+            .WithErrorMessage("'Email' must not be empty.")
+            .Only();
+    }
+}
 //     [Fact]
 //     public void RegistrationRequest_Negative_Create_New_Record_With_Short_Email()
 //     {

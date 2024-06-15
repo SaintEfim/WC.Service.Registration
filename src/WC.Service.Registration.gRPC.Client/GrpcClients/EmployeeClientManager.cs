@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Grpc.Net.Client;
+using WC.Library.Domain.Models;
 using WC.Service.Registration.Domain;
+using WC.Service.Registration.gRPC.Client.GrpcClients;
 using WC.Service.Registration.gRPC.Models;
 
 namespace WC.Service.Registration.gRPC.GrpcClients;
@@ -22,7 +24,7 @@ public class EmployeeClientManager : IEmployeeClientManager
         CancellationToken cancellationToken)
     {
         var createResult =
-            await _client.CreateAsync(_mapper.Map<EmployeeCreate>(entity), cancellationToken: cancellationToken);
+            await _client.CreateAsync(_mapper.Map<EmployeeCreateRequest>(entity), cancellationToken: cancellationToken);
         return _mapper.Map<CreateResultModel>(createResult);
     }
 }

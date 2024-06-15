@@ -7,20 +7,19 @@ package employee_registration;
 import "google/protobuf/empty.proto";
 
 service EmployeeService {
-//  rpc Get (google.protobuf.Empty) returns (EmployeeListResponse);
-  rpc Create (EmployeeCreate) returns (CreateResult);
+  rpc Create (EmployeeCreateRequest) returns (EmployeeCreateResponse);
 }
 
-message EmployeeCreate {
+message EmployeeCreateRequest {
   string id = 1;
   string name = 2;
   string surname = 3;
-  string Patronymic = 4;
+  string patronymic = 4;
   string email = 5;
   string password = 6;
-  string Position = 7;
+  string position = 7;
 }
 
-message CreateResult {
+message EmployeeCreateResponse {
   string id = 1;
 }

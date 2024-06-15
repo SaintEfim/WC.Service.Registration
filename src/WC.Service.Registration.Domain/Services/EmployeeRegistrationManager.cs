@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using WC.Library.BCryptPasswordHash;
-using WC.Service.Registration.Domain.Exceptions;
+using WC.Library.Domain.Models;
+using WC.Service.Registration.gRPC.Client.GrpcClients;
 using WC.Service.Registration.gRPC.GrpcClients;
 using WC.Service.Registration.gRPC.Models;
 using EmployeeRegistrationModel = WC.Service.Registration.Domain.Models.EmployeeRegistrationModel;
@@ -26,7 +27,7 @@ public class EmployeeRegistrationManager : IEmployeeRegistrationManager
         _clientManager = clientManager;
     }
 
-    public async Task<EmployeeRegistrationModel> Register(EmployeeRegistrationModel model,
+    public async Task<CreateResultModel> Register(EmployeeRegistrationModel model,
         CancellationToken cancellationToken = default)
     {
         Validate(model);
@@ -42,12 +43,11 @@ public class EmployeeRegistrationManager : IEmployeeRegistrationManager
 
         var employee = _mapper.Map<EmployeeCreateModel>(model);
 
-        employee.Id = Guid.NewGuid();
         employee.Password = _passwordHasher.Hash(employee.Password);
-        
+
         var createResult = await _clientManager.Create(employee, cancellationToken);
 
-        return _mapper.Map<EmployeeRegistrationModel>(createResult);
+        return createResult;
     }
 
     private void Validate<T>(T model)
