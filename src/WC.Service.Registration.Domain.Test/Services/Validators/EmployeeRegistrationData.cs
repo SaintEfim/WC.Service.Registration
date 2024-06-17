@@ -7,11 +7,11 @@ public static class EmployeeRegistrationData
     public static readonly Func<EmployeeRegistrationModel> EmployeeRegistrationModel = () =>
         new EmployeeRegistrationModel
         {
-            Name = "Efim",
-            Surname = "Fedenko",
-            Patronymic = "Mikhailovich",
+            Name = "Иван",
+            Surname = "Иванов",
+            Patronymic = "Иванович",
             Email = "Test@gmail.com",
             Password = "Test1234@,",
-            Position = "Programmer"
+            Position = "Программист"
         };
 }

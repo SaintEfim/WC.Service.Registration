@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using WC.Library.Domain.Models;
+using WC.Service.Registration.gRPC.Client.Models;
 using WC.Service.Registration.gRPC.GrpcClients;
-using WC.Service.Registration.gRPC.Models;
 
 namespace WC.Service.Registration.gRPC;
 

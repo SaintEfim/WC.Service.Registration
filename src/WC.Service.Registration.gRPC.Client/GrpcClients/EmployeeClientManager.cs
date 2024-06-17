@@ -3,7 +3,7 @@ using Grpc.Net.Client;
 using WC.Library.Domain.Models;
 using WC.Service.Registration.Domain;
 using WC.Service.Registration.gRPC.Client.GrpcClients;
-using WC.Service.Registration.gRPC.Models;
+using WC.Service.Registration.gRPC.Client.Models;
 
 namespace WC.Service.Registration.gRPC.GrpcClients;
 

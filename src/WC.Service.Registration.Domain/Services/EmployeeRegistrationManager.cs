@@ -3,8 +3,7 @@ using FluentValidation;
 using WC.Library.BCryptPasswordHash;
 using WC.Library.Domain.Models;
 using WC.Service.Registration.gRPC.Client.GrpcClients;
-using WC.Service.Registration.gRPC.GrpcClients;
-using WC.Service.Registration.gRPC.Models;
+using WC.Service.Registration.gRPC.Client.Models;
 using EmployeeRegistrationModel = WC.Service.Registration.Domain.Models.EmployeeRegistrationModel;
 
 namespace WC.Service.Registration.Domain.Services;

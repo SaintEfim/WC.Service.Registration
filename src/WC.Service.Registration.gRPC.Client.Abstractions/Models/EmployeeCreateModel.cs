@@ -1,4 +1,4 @@
-﻿namespace WC.Service.Registration.gRPC.Models;
+﻿namespace WC.Service.Registration.gRPC.Client.Models;
 
 public class EmployeeCreateModel
 {
