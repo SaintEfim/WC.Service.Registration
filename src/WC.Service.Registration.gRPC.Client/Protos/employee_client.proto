@@ -10,7 +10,7 @@ service EmployeeService {
   rpc Create (EmployeeCreateRequest) returns (EmployeeCreateResponse);
 }
 
-message EmployeeCreateRequest {
+message Employee {
   string id = 1;
   string name = 2;
   string surname = 3;
@@ -18,6 +18,9 @@ message EmployeeCreateRequest {
   string email = 5;
   string password = 6;
   string position = 7;
+}
+message EmployeeCreateRequest {
+  Employee employee = 1;
 }
 
 message EmployeeCreateResponse {
