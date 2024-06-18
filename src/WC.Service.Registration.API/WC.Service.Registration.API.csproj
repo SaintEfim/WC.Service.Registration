@@ -17,7 +17,7 @@
 
     <ItemGroup>
       <PackageReference Include="NSwag.Annotations" Version="14.0.8" />
-      <PackageReference Include="WC.Library.Web" Version="1.0.11" />
+      <PackageReference Include="WC.Library.Web" Version="1.0.12" />
     </ItemGroup>
 
     <ItemGroup>
