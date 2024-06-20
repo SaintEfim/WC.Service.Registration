@@ -5,14 +5,14 @@ using WC.Service.Registration.Domain;
 using WC.Service.Registration.gRPC.Client.GrpcClients;
 using WC.Service.Registration.gRPC.Client.Models;
 
-namespace WC.Service.Registration.gRPC.GrpcClients;
+namespace WC.Service.Registration.gRPC.GrpcClients.Employee;
 
-public class EmployeeClientManager : IEmployeeClientManager
+public class EmployeeClient : IEmployeeClient
 {
     private readonly EmployeeService.EmployeeServiceClient _client;
     private readonly IMapper _mapper;
 
-    public EmployeeClientManager(IMapper mapper, IEmployeeClientConfiguration configuration)
+    public EmployeeClient(IMapper mapper, IEmployeeClientConfiguration configuration)
     {
         _mapper = mapper;
 
@@ -25,6 +25,7 @@ public class EmployeeClientManager : IEmployeeClientManager
     {
         var createResult =
             await _client.CreateAsync(_mapper.Map<EmployeeCreateRequest>(entity), cancellationToken: cancellationToken);
+        
         return _mapper.Map<CreateResultModel>(createResult);
     }
 }

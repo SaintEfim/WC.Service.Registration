@@ -2,6 +2,7 @@
 using FluentValidation.TestHelper;
 using WC.Library.Shared.Constants;
 using WC.Service.Registration.Domain.Services.Validators;
+using WC.Service.Registration.Domain.Services.Validators.Model;
 
 namespace WC.Service.Registration.Domain.Test.Services.Validators;
 

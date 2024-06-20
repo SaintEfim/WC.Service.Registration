@@ -1,10 +1,8 @@
 syntax = "proto3";
 
-option csharp_namespace = "WC.Service.Registration.gRPC.GrpcClients";
+option csharp_namespace = "WC.Service.Registration.gRPC.GrpcClients.Employee";
 
-package employee_registration;
-
-import "google/protobuf/empty.proto";
+package employee;
 
 service EmployeeService {
   rpc Create (EmployeeCreateRequest) returns (EmployeeCreateResponse);

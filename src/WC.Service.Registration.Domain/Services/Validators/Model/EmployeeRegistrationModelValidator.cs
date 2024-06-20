@@ -2,7 +2,7 @@
 using WC.Library.Employee.Shared.Validators;
 using WC.Service.Registration.Domain.Models;
 
-namespace WC.Service.Registration.Domain.Services.Validators;
+namespace WC.Service.Registration.Domain.Services.Validators.Model;
 
 public class EmployeeRegistrationModelValidator : AbstractValidator<EmployeeRegistrationModel>
 {
@@ -27,9 +27,5 @@ public class EmployeeRegistrationModelValidator : AbstractValidator<EmployeeRegi
         RuleFor(x => x.Patronymic)
             .SetValidator(new NameValidator(nameof(EmployeeRegistrationModel.Patronymic))!)
             .When(x => !string.IsNullOrEmpty(x.Patronymic));
-
-        RuleFor(x => x.Position)
-            .NotNull()
-            .SetValidator(new PositionValidator(nameof(EmployeeRegistrationModel.Position)));
     }
 }
