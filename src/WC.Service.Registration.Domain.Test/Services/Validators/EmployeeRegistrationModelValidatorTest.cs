@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using FluentValidation.TestHelper;
 using WC.Library.Shared.Constants;
-using WC.Service.Registration.Domain.Services.Validators;
 using WC.Service.Registration.Domain.Services.Validators.Model;
 
 namespace WC.Service.Registration.Domain.Test.Services.Validators;
@@ -216,7 +215,7 @@ public class EmployeeRegistrationModelValidatorTest
         model.Name = string.Empty;
         var res = _validator.TestValidate(model);
         res.ShouldHaveAnyValidationError()
-            .WithErrorMessage("Name cannot be empty.")
+            .WithErrorMessage("'Name' must not be empty.")
             .Only();
     }
 
@@ -228,7 +227,7 @@ public class EmployeeRegistrationModelValidatorTest
         var res = _validator.TestValidate(model);
         res.ShouldHaveAnyValidationError()
             .WithErrorMessage(
-                "Name must be at least 2 characters long.")
+                "The length of 'Name' must be at least 2 characters. You entered 1 characters.")
             .Only();
     }
 
@@ -240,7 +239,7 @@ public class EmployeeRegistrationModelValidatorTest
         var res = _validator.TestValidate(model);
         res.ShouldHaveAnyValidationError()
             .WithErrorMessage(
-                "Name must be at most 50 characters long.")
+                "The length of 'Name' must be 50 characters or fewer. You entered 51 characters.")
             .Only();
     }
 
@@ -255,7 +254,7 @@ public class EmployeeRegistrationModelValidatorTest
                 "Name must start with an uppercase letter followed by lowercase letters, all in Cyrillic.")
             .Only();
     }
-    
+
     [Fact]
     public void EmployeeRegistration_Negative_Create_New_Record_With_A_Name_Where_The_First_Letter_Is_Not_Capitalized()
     {
@@ -267,7 +266,7 @@ public class EmployeeRegistrationModelValidatorTest
                 "Name must start with an uppercase letter followed by lowercase letters, all in Cyrillic.")
             .Only();
     }
-    
+
     [Fact]
     public void EmployeeRegistration_Negative_Create_New_Record_With_A_Name_Containing_Special_Characters()
     {
@@ -279,7 +278,7 @@ public class EmployeeRegistrationModelValidatorTest
                 "Name must start with an uppercase letter followed by lowercase letters, all in Cyrillic.")
             .Only();
     }
-    
+
     [Fact]
     public void EmployeeRegistration_Negative_Create_New_Record_With_Null_Surname()
     {
@@ -298,7 +297,7 @@ public class EmployeeRegistrationModelValidatorTest
         model.Surname = string.Empty;
         var res = _validator.TestValidate(model);
         res.ShouldHaveAnyValidationError()
-            .WithErrorMessage("Surname cannot be empty.")
+            .WithErrorMessage("'Surname' must not be empty.")
             .Only();
     }
 
@@ -310,7 +309,7 @@ public class EmployeeRegistrationModelValidatorTest
         var res = _validator.TestValidate(model);
         res.ShouldHaveAnyValidationError()
             .WithErrorMessage(
-                "Surname must be at least 2 characters long.")
+                "The length of 'Surname' must be at least 2 characters. You entered 1 characters.")
             .Only();
     }
 
@@ -322,7 +321,7 @@ public class EmployeeRegistrationModelValidatorTest
         var res = _validator.TestValidate(model);
         res.ShouldHaveAnyValidationError()
             .WithErrorMessage(
-                "Surname must be at most 50 characters long.")
+                "The length of 'Surname' must be 50 characters or fewer. You entered 51 characters.")
             .Only();
     }
 
@@ -337,9 +336,10 @@ public class EmployeeRegistrationModelValidatorTest
                 "Surname must start with an uppercase letter followed by lowercase letters, all in Cyrillic.")
             .Only();
     }
-    
+
     [Fact]
-    public void EmployeeRegistration_Negative_Create_New_Record_With_A_Surname_Where_The_First_Letter_Is_Not_Capitalized()
+    public void
+        EmployeeRegistration_Negative_Create_New_Record_With_A_Surname_Where_The_First_Letter_Is_Not_Capitalized()
     {
         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
         model.Surname = "иванов";
@@ -349,7 +349,7 @@ public class EmployeeRegistrationModelValidatorTest
                 "Surname must start with an uppercase letter followed by lowercase letters, all in Cyrillic.")
             .Only();
     }
-    
+
     [Fact]
     public void EmployeeRegistration_Negative_Create_New_Record_With_A_Surname_Containing_Special_Characters()
     {
@@ -363,6 +363,28 @@ public class EmployeeRegistrationModelValidatorTest
     }
 
     [Fact]
+    public void EmployeeRegistration_Negative_Create_New_Record_With_Null_Position()
+    {
+        var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+        model.Position = null!;
+        var res = _validator.TestValidate(model);
+        res.ShouldHaveAnyValidationError()
+            .WithErrorMessage("'Position' must not be empty.")
+            .Only();
+    }
+
+    [Fact]
+    public void EmployeeRegistration_Negative_Create_New_Record_With_Empty_Position()
+    {
+        var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+        model.Position = string.Empty;
+        var res = _validator.TestValidate(model);
+        res.ShouldHaveAnyValidationError()
+            .WithErrorMessage("'Position' must not be empty.")
+            .Only();
+    }
+
+    [Fact]
     public void EmployeeRegistration_Negative_Create_New_Record_With_Short_Patronymic()
     {
         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
@@ -370,7 +392,7 @@ public class EmployeeRegistrationModelValidatorTest
         var res = _validator.TestValidate(model);
         res.ShouldHaveAnyValidationError()
             .WithErrorMessage(
-                "Patronymic must be at least 2 characters long.")
+                "The length of 'Patronymic' must be at least 2 characters. You entered 1 characters.")
             .Only();
     }
 
@@ -382,7 +404,7 @@ public class EmployeeRegistrationModelValidatorTest
         var res = _validator.TestValidate(model);
         res.ShouldHaveAnyValidationError()
             .WithErrorMessage(
-                "Patronymic must be at most 50 characters long.")
+                "The length of 'Patronymic' must be 50 characters or fewer. You entered 51 characters.")
             .Only();
     }
 
@@ -397,9 +419,10 @@ public class EmployeeRegistrationModelValidatorTest
                 "Patronymic must start with an uppercase letter followed by lowercase letters, all in Cyrillic.")
             .Only();
     }
-    
+
     [Fact]
-    public void EmployeeRegistration_Negative_Create_New_Record_With_A_Patronymic_Where_The_First_Letter_Is_Not_Capitalized()
+    public void
+        EmployeeRegistration_Negative_Create_New_Record_With_A_Patronymic_Where_The_First_Letter_Is_Not_Capitalized()
     {
         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
         model.Patronymic = "иванович";
@@ -409,7 +432,7 @@ public class EmployeeRegistrationModelValidatorTest
                 "Patronymic must start with an uppercase letter followed by lowercase letters, all in Cyrillic.")
             .Only();
     }
-    
+
     [Fact]
     public void EmployeeRegistration_Negative_Create_New_Record_With_A_Patronymic_Containing_Special_Characters()
     {

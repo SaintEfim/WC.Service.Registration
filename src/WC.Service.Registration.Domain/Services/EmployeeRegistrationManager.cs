@@ -5,7 +5,6 @@ using WC.Library.BCryptPasswordHash;
 using WC.Library.Domain.Models;
 using WC.Library.Domain.Validators;
 using WC.Service.Registration.gRPC.Client.Clients;
-using WC.Service.Registration.gRPC.Client.Models;
 using WC.Service.Registration.gRPC.Client.Models.Employee;
 using EmployeeRegistrationModel = WC.Service.Registration.Domain.Models.EmployeeRegistrationModel;
 
