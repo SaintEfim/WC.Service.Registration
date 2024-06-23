@@ -12,14 +12,10 @@ message Position {
   string Name = 1;
 }
 
-message CheckPosition  {
-  bool isPositionExists = 1;
-}
-
 message CheckPositionRequest {
   Position position = 1;
 }
 
 message CheckPositionResponse {
-  CheckPosition isPositionExists = 1;
+  bool isPositionExists = 1;
 }
