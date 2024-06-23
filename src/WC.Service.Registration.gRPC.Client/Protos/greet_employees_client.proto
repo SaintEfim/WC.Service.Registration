@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-option csharp_namespace = "WC.Service.Registration.gRPC.GrpcClients.Employee";
+option csharp_namespace = "WC.Service.Registration.gRPC.Clients.Employees";
 
-package employee;
+package employees;
 
-service EmployeeService {
+service GreeterEmployees {
   rpc Create (EmployeeCreateRequest) returns (EmployeeCreateResponse);
 }
 

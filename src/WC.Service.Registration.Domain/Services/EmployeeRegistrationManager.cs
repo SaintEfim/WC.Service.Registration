@@ -4,7 +4,8 @@ using FluentValidation;
 using WC.Library.BCryptPasswordHash;
 using WC.Library.Domain.Models;
 using WC.Library.Domain.Validators;
-using WC.Service.Registration.gRPC.Client.GrpcClients;
+using WC.Service.Registration.gRPC.Client.Clients;
+using WC.Service.Registration.gRPC.Client.Clients.Employees;
 using WC.Service.Registration.gRPC.Client.Models;
 using EmployeeRegistrationModel = WC.Service.Registration.Domain.Models.EmployeeRegistrationModel;
 
@@ -15,11 +16,11 @@ public class EmployeeRegistrationManager : IEmployeeRegistrationManager
     private readonly IBCryptPasswordHasher _passwordHasher;
     private readonly IEnumerable<IValidator> _validators;
     private readonly IMapper _mapper;
-    private readonly IEmployeeClient _client;
+    private readonly IGreeterEmployeesClient _client;
 
     public EmployeeRegistrationManager(IMapper mapper,
         IEnumerable<IValidator> validators, IBCryptPasswordHasher passwordHasher,
-        IEmployeeClient client)
+        IGreeterEmployeesClient client)
     {
         _mapper = mapper;
         _validators = validators;

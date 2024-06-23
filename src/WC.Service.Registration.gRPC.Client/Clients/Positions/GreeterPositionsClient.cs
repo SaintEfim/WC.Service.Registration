@@ -1,21 +1,21 @@
 ﻿using AutoMapper;
 using Grpc.Net.Client;
 using WC.Service.Registration.Domain;
-using WC.Service.Registration.gRPC.Client.GrpcClients;
+using WC.Service.Registration.gRPC.Client.Clients.Positions;
 using WC.Service.Registration.gRPC.Client.Models;
 
-namespace WC.Service.Registration.gRPC.GrpcClients.Position;
+namespace WC.Service.Registration.gRPC.Clients.Positions;
 
-public class PositionClient : IPositionClient
+public class GreeterPositionsClient : IGreeterPositionsClient
 {
-    private readonly PositionService.PositionServiceClient _client;
+    private readonly GreeterPositions.GreeterPositionsClient _client;
     private readonly IMapper _mapper;
 
-    public PositionClient(IMapper mapper, IPositionClientConfiguration configuration)
+    public GreeterPositionsClient(IMapper mapper, IPositionsClientConfiguration configuration)
     {
         _mapper = mapper;
         var channel = GrpcChannel.ForAddress(configuration.GetBaseUrl());
-        _client = new PositionService.PositionServiceClient(channel);
+        _client = new GreeterPositions.GreeterPositionsClient(channel);
     }
 
     public async Task<CheckPositionResponseModel> CheckPosition(PositionRequestModel positionRequest,

@@ -8,8 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Protobuf Include="Protos\employee_client.proto" GrpcServices="Client" />
-        <Protobuf Include="Protos\position_client.proto">
+        <Protobuf Include="Protos\greet_employees_client.proto" GrpcServices="Client" />
+        <Protobuf Include="Protos\greet_positions_client.proto">
           <GrpcServices>Client</GrpcServices>
           <Access>Public</Access>
           <ProtoCompile>True</ProtoCompile>

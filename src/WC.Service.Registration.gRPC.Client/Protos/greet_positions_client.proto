@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-option csharp_namespace = "WC.Service.Registration.gRPC.GrpcClients.Position";
+option csharp_namespace = "WC.Service.Registration.gRPC.Clients.Positions";
 
-package position;
+package positions;
 
-service PositionService {
+service GreeterPositions {
   rpc CheckPositionExists (CheckPositionRequest) returns (CheckPositionResponse);
 }
 

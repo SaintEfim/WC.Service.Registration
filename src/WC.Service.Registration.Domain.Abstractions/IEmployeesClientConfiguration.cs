@@ -1,6 +1,6 @@
 ﻿namespace WC.Service.Registration.Domain;
 
-public interface IPositionClientConfiguration
+public interface IEmployeesClientConfiguration
 {
     string GetBaseUrl();
 }

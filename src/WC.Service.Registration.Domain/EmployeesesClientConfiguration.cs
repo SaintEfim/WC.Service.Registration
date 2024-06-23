@@ -2,11 +2,11 @@
 
 namespace WC.Service.Registration.Domain;
 
-public class EmployeeClientConfiguration : IEmployeeClientConfiguration
+public class EmployeesesClientConfiguration : IEmployeesClientConfiguration
 {
     private readonly Lazy<string> _baseUrl;
 
-    public EmployeeClientConfiguration(IConfiguration config)
+    public EmployeesesClientConfiguration(IConfiguration config)
     {
         _baseUrl = new Lazy<string>(() => config.GetValue<string>("EmployeeService:Url") ??
                                           throw new InvalidOperationException(
