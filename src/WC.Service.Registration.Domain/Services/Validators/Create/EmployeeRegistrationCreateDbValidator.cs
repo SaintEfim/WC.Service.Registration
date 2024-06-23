@@ -13,18 +13,16 @@ public class EmployeeRegistrationCreateDbValidator : AbstractValidator<EmployeeR
         RuleFor(x => x)
             .CustomAsync(async (positionModel, context, cancellationToken) =>
             {
-                var positions = await greeterPositionsClient.CheckPosition(new PositionRequestModel()
+                var positions = await greeterPositionsClient.CheckPosition(new CheckPositionRequestModel
                 {
                     Name = positionModel.Position
                 }, cancellationToken);
 
-                // var duplicatePosition = positions.Any(x => x.Name == positionModel.Name);
-                //
-                // if (duplicatePosition)
-                // {
-                //     context.AddFailure(nameof(PositionModel),
-                //         $"Position with this {positionModel.Name} already exists.");
-                // }
+                if (!positions.IsPositionExists)
+                {
+                    context.AddFailure(nameof(positionModel),
+                        $"Position with this {positionModel.Name} already exists.");
+                }
             });
     }
 }

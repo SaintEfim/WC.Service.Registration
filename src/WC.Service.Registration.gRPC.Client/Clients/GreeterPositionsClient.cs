@@ -17,11 +17,11 @@ public class GreeterPositionsClient : IGreeterPositionsClient
         _client = new GreeterPositions.GreeterPositionsClient(channel);
     }
 
-    public async Task<CheckPositionResponseModel> CheckPosition(PositionRequestModel positionRequest,
+    public async Task<CheckPositionResponseModel> CheckPosition(CheckPositionRequestModel checkPositionRequest,
         CancellationToken cancellationToken)
     {
         var checkResult =
-            await _client.CheckPositionExistsAsync(_mapper.Map<CheckPositionRequest>(positionRequest),
+            await _client.CheckPositionExistsAsync(_mapper.Map<CheckPositionRequest>(checkPositionRequest),
                 cancellationToken: cancellationToken);
 
         return _mapper.Map<CheckPositionResponseModel>(checkResult);

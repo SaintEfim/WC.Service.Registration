@@ -4,6 +4,6 @@ namespace WC.Service.Registration.gRPC.Client.Clients;
 
 public interface IGreeterPositionsClient
 {
-    Task<CheckPositionResponseModel> CheckPosition(PositionRequestModel positionRequest,
+    Task<CheckPositionResponseModel> CheckPosition(CheckPositionRequestModel checkPositionRequest,
         CancellationToken cancellationToken = default);
 }

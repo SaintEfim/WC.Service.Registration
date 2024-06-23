@@ -13,7 +13,7 @@ public sealed class AutoMapperProfile : Profile
         CreateMap<EmployeeCreateModel, EmployeeCreateRequest>();
         CreateMap<EmployeeCreateResponse, CreateResultModel>();
 
-        CreateMap<PositionRequestModel, CheckPositionRequest>();
-        CreateMap<CheckPositionResponseModel, CheckPositionResponse>();
+        CreateMap<CheckPositionRequestModel, CheckPositionRequest>();
+        CreateMap<CheckPositionResponse, CheckPositionResponseModel>();
     }
 }

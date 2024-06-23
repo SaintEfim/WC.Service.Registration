@@ -9,7 +9,7 @@ service GreeterPositions {
 }
 
 message Position {
-  string Name = 1;
+  string name = 1;
 }
 
 message CheckPositionRequest {
