@@ -1,8 +1,6 @@
 ﻿using Autofac;
-using WC.Service.Registration.gRPC.Client.Clients;
 using WC.Service.Registration.gRPC.Client.Clients.Employees;
 using WC.Service.Registration.gRPC.Client.Clients.Positions;
-using WC.Service.Registration.gRPC.Clients;
 using WC.Service.Registration.gRPC.Clients.Employees;
 using WC.Service.Registration.gRPC.Clients.Positions;
 

@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using WC.Library.Employee.Shared.Validators;
 using WC.Service.Registration.Domain.Models;
 
 namespace WC.Service.Registration.Domain.Services.Validators.Model;
