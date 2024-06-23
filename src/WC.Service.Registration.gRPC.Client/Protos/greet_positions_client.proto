@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option csharp_namespace = "WC.Service.Registration.gRPC.Client.Clients";
+
+package positions;
+
+service GreeterPositions {
+  rpc CheckPositionExists (CheckPositionRequest) returns (CheckPositionResponse);
+}
+
+message Position {
+  string name = 1;
+}
+
+message CheckPositionRequest {
+  Position position = 1;
+}
+
+message CheckPositionResponse {
+  bool isPositionExists = 1;
+}

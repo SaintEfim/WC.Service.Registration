@@ -1,6 +1,6 @@
-﻿namespace WC.Service.Registration.gRPC.Models;
+﻿namespace WC.Service.Registration.gRPC.Client.Models.Employee;
 
-public class EmployeeRegistrationClientModel
+public class EmployeeCreateModel
 {
     public Guid Id { get; set; }
 

@@ -1,10 +1,11 @@
-﻿using WC.Service.Registration.Domain.Models;
+﻿using WC.Library.Domain.Models;
+using WC.Service.Registration.Domain.Models;
 
 namespace WC.Service.Registration.Domain.Services;
 
 public interface IEmployeeRegistrationManager
 {
-    Task<EmployeeRegistrationModel> Register(
+    Task<CreateResultModel> Register(
         EmployeeRegistrationModel registrationRequestModel,
         CancellationToken cancellationToken = default);
 }

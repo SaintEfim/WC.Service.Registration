@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using WC.Service.Registration.Domain;
 using WC.Service.Registration.gRPC;
+using WC.Service.Registration.gRPC.Client;
 using StartupBase = WC.Library.Web.Startup.StartupBase;
 
 namespace WC.Service.Registration.API;

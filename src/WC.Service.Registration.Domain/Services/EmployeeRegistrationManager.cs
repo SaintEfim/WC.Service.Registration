@@ -1,9 +1,11 @@
-﻿using AutoMapper;
+﻿using System.Collections.Immutable;
+using AutoMapper;
 using FluentValidation;
 using WC.Library.BCryptPasswordHash;
-using WC.Service.Registration.Domain.Exceptions;
-using WC.Service.Registration.gRPC.GrpcClients;
-using WC.Service.Registration.gRPC.Models;
+using WC.Library.Domain.Models;
+using WC.Library.Domain.Validators;
+using WC.Service.Registration.gRPC.Client.Clients;
+using WC.Service.Registration.gRPC.Client.Models.Employee;
 using EmployeeRegistrationModel = WC.Service.Registration.Domain.Models.EmployeeRegistrationModel;
 
 namespace WC.Service.Registration.Domain.Services;
@@ -13,55 +15,54 @@ public class EmployeeRegistrationManager : IEmployeeRegistrationManager
     private readonly IBCryptPasswordHasher _passwordHasher;
     private readonly IEnumerable<IValidator> _validators;
     private readonly IMapper _mapper;
-    private readonly IEmployeeRegistrationClientManager _clientManager;
-    private readonly IEmployeeRegistrationClientProvider _clientProvider;
+    private readonly IGreeterEmployeesClient _client;
 
     public EmployeeRegistrationManager(IMapper mapper,
         IEnumerable<IValidator> validators, IBCryptPasswordHasher passwordHasher,
-        IEmployeeRegistrationClientManager clientManager, IEmployeeRegistrationClientProvider clientProvider)
+        IGreeterEmployeesClient client)
     {
         _mapper = mapper;
         _validators = validators;
         _passwordHasher = passwordHasher;
-        _clientManager = clientManager;
-        _clientProvider = clientProvider;
+        _client = client;
     }
 
-    public async Task<EmployeeRegistrationModel> Register(EmployeeRegistrationModel model,
+    public async Task<CreateResultModel> Register(EmployeeRegistrationModel model,
         CancellationToken cancellationToken = default)
     {
-        Validate(model);
+        await Validate<IDomainCreateValidator>(model);
 
-        var employees = await _clientProvider.Get(cancellationToken);
-        var checkEmployee = employees.SingleOrDefault(x => x.Email == model.Email);
-
-        if (checkEmployee != null)
-        {
-            throw new DuplicateEmployeeException(
-                $"A user with the same {model.Email} address already exists.");
-        }
-
-        var employee = _mapper.Map<EmployeeRegistrationClientModel>(model);
-
-        employee.Id = Guid.NewGuid();
+        var employee = _mapper.Map<EmployeeCreateModel>(model);
 
         employee.Password = _passwordHasher.Hash(employee.Password);
 
-        var createResult = await _clientManager.Create(employee, cancellationToken);
+        var createResult = await _client.Create(employee, cancellationToken);
 
-        return _mapper.Map<EmployeeRegistrationModel>(createResult);
+        return createResult;
     }
 
-    private void Validate<T>(T model)
+    private async Task Validate<TV>(EmployeeRegistrationModel model)
     {
-        var errors = _validators.OfType<IValidator<T>>()
-            .Select(validator => validator.Validate(model))
-            .SelectMany(result => result.Errors)
-            .ToList();
+        var validationSet = _validators.Where(v => v.GetType().IsAssignableTo(typeof(TV))).Cast<IValidator<EmployeeRegistrationModel>>();
+        await Validate(model, validationSet);
+    }
 
-        if (errors.Count > 0)
+    private static async Task Validate<TPayload>(
+        TPayload model,
+        IEnumerable<IValidator<TPayload>> source,
+        CancellationToken cancellationToken = default)
+        where TPayload : class
+    {
+        var validationTasks = source.Select(x => x.ValidateAsync(model, cancellationToken));
+        var results = await Task.WhenAll(validationTasks);
+
+        var failures = results.SelectMany(x => x.Errors)
+            .Where(x => x != null)
+            .ToImmutableList();
+
+        if (!failures.IsEmpty)
         {
-            throw new ValidationException(errors);
+            throw new ValidationException(failures);
         }
     }
 }

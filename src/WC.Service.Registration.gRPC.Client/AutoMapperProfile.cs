@@ -1,21 +1,19 @@
 ﻿using AutoMapper;
-using WC.Service.Registration.gRPC.GrpcClients;
-using WC.Service.Registration.gRPC.Models;
+using WC.Library.Domain.Models;
+using WC.Service.Registration.gRPC.Client.Clients;
+using WC.Service.Registration.gRPC.Client.Models.Employee;
+using WC.Service.Registration.gRPC.Client.Models.Position;
 
-namespace WC.Service.Registration.gRPC;
+namespace WC.Service.Registration.gRPC.Client;
 
 public sealed class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<Employee, EmployeeRegistrationClientModel>();
+        CreateMap<EmployeeCreateModel, EmployeeCreateRequest>();
+        CreateMap<EmployeeCreateResponse, CreateResultModel>();
 
-        CreateMap<EmployeeRegistrationClientModel, Employee>();
-
-        CreateMap<EmployeeListResponse, List<EmployeeRegistrationClientModel>>()
-            .ConvertUsing((src, _, context) =>
-                context.Mapper.Map<List<EmployeeRegistrationClientModel>>(src.Employees));
-
-        CreateMap<CreateResult, CreateResultModel>();
+        CreateMap<CheckPositionRequestModel, CheckPositionRequest>();
+        CreateMap<CheckPositionResponse, CheckPositionResponseModel>();
     }
 }

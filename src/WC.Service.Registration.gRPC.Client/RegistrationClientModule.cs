@@ -1,14 +1,14 @@
 ﻿using Autofac;
-using WC.Service.Registration.gRPC.GrpcClients;
+using WC.Service.Registration.gRPC.Client.Clients;
 
-namespace WC.Service.Registration.gRPC;
+namespace WC.Service.Registration.gRPC.Client;
 
 public class RegistrationClientModule : Module
 {
     protected override void Load(
         ContainerBuilder builder)
     {
-        builder.RegisterType<EmployeeRegistrationClientManager>().As<IEmployeeRegistrationClientManager>().SingleInstance();
-        builder.RegisterType<EmployeeRegistrationClientProvider>().As<IEmployeeRegistrationClientProvider>().SingleInstance();
+        builder.RegisterType<GreeterEmployeesClient>().As<IGreeterEmployeesClient>().InstancePerLifetimeScope();
+        builder.RegisterType<GreeterPositionsClient>().As<IGreeterPositionsClient>().InstancePerLifetimeScope();
     }
 }
