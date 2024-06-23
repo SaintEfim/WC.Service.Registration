@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using Grpc.Net.Client;
 using WC.Service.Registration.Domain;
-using WC.Service.Registration.gRPC.Client.Clients.Positions;
-using WC.Service.Registration.gRPC.Client.Models;
 using WC.Service.Registration.gRPC.Client.Models.Position;
 
-namespace WC.Service.Registration.gRPC.Clients.Positions;
+namespace WC.Service.Registration.gRPC.Client.Clients;
 
 public class GreeterPositionsClient : IGreeterPositionsClient
 {

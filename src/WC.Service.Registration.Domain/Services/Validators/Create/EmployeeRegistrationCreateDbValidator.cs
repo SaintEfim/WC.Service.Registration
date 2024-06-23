@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using WC.Service.Registration.Domain.Models;
 using WC.Service.Registration.gRPC.Client.Clients;
-using WC.Service.Registration.gRPC.Client.Clients.Positions;
 using WC.Service.Registration.gRPC.Client.Models;
 using WC.Service.Registration.gRPC.Client.Models.Position;
 

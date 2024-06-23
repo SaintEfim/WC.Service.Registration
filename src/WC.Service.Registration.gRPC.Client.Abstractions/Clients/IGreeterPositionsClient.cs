@@ -1,7 +1,6 @@
-﻿using WC.Service.Registration.gRPC.Client.Models;
-using WC.Service.Registration.gRPC.Client.Models.Position;
+﻿using WC.Service.Registration.gRPC.Client.Models.Position;
 
-namespace WC.Service.Registration.gRPC.Client.Clients.Positions;
+namespace WC.Service.Registration.gRPC.Client.Clients;
 
 public interface IGreeterPositionsClient
 {

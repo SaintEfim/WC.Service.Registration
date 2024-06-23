@@ -1,10 +1,7 @@
 ﻿using Autofac;
-using WC.Service.Registration.gRPC.Client.Clients.Employees;
-using WC.Service.Registration.gRPC.Client.Clients.Positions;
-using WC.Service.Registration.gRPC.Clients.Employees;
-using WC.Service.Registration.gRPC.Clients.Positions;
+using WC.Service.Registration.gRPC.Client.Clients;
 
-namespace WC.Service.Registration.gRPC;
+namespace WC.Service.Registration.gRPC.Client;
 
 public class RegistrationClientModule : Module
 {

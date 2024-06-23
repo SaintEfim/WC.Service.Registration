@@ -2,11 +2,9 @@
 using Grpc.Net.Client;
 using WC.Library.Domain.Models;
 using WC.Service.Registration.Domain;
-using WC.Service.Registration.gRPC.Client.Clients.Employees;
-using WC.Service.Registration.gRPC.Client.Models;
 using WC.Service.Registration.gRPC.Client.Models.Employee;
 
-namespace WC.Service.Registration.gRPC.Clients.Employees;
+namespace WC.Service.Registration.gRPC.Client.Clients;
 
 public class GreeterEmployeesClient : IGreeterEmployeesClient
 {
