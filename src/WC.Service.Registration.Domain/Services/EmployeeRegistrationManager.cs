@@ -6,6 +6,7 @@ using WC.Library.Domain.Models;
 using WC.Library.Domain.Validators;
 using WC.Service.Registration.gRPC.Client.Clients.Employees;
 using WC.Service.Registration.gRPC.Client.Models;
+using WC.Service.Registration.gRPC.Client.Models.Employee;
 using EmployeeRegistrationModel = WC.Service.Registration.Domain.Models.EmployeeRegistrationModel;
 
 namespace WC.Service.Registration.Domain.Services;

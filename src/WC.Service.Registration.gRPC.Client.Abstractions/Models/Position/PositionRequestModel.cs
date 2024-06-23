@@ -1,4 +1,4 @@
-﻿namespace WC.Service.Registration.gRPC.Client.Models;
+﻿namespace WC.Service.Registration.gRPC.Client.Models.Position;
 
 public class PositionRequestModel
 {
