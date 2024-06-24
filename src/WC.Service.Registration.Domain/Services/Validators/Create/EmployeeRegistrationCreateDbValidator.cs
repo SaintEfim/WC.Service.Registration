@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using WC.Service.Registration.Domain.Models;
 using WC.Service.Registration.gRPC.Client.Clients;
-using WC.Service.Registration.gRPC.Client.Models;
 using WC.Service.Registration.gRPC.Client.Models.Position;
 
 namespace WC.Service.Registration.Domain.Services.Validators.Create;
@@ -18,7 +17,7 @@ public class EmployeeRegistrationCreateDbValidator : AbstractValidator<EmployeeR
                     Name = positionModel.Position
                 }, cancellationToken);
 
-                if (!positions.IsPositionExists)
+                if (positions.IsPositionExists)
                 {
                     context.AddFailure(nameof(positionModel),
                         $"Position with this {positionModel.Name} already exists.");

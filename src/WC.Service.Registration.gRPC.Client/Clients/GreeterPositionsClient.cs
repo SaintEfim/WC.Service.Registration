@@ -13,6 +13,7 @@ public class GreeterPositionsClient : IGreeterPositionsClient
     public GreeterPositionsClient(IMapper mapper, IPositionsClientConfiguration configuration)
     {
         _mapper = mapper;
+
         var channel = GrpcChannel.ForAddress(configuration.GetBaseUrl());
         _client = new GreeterPositions.GreeterPositionsClient(channel);
     }
@@ -24,6 +25,9 @@ public class GreeterPositionsClient : IGreeterPositionsClient
             await _client.CheckPositionExistsAsync(_mapper.Map<CheckPositionRequest>(checkPositionRequest),
                 cancellationToken: cancellationToken);
 
-        return _mapper.Map<CheckPositionResponseModel>(checkResult);
+        return new CheckPositionResponseModel
+        {
+            IsPositionExists = checkResult.IsPositionExists
+        };
     }
 }
