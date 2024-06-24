@@ -13,7 +13,8 @@ public sealed class AutoMapperProfile : Profile
         CreateMap<EmployeeCreateModel, EmployeeCreateRequest>();
         CreateMap<EmployeeCreateResponse, CreateResultModel>();
 
-        CreateMap<CheckPositionRequestModel, CheckPositionRequest>();
-        CreateMap<CheckPositionResponse, CheckPositionResponseModel>();
+        CreateMap<CheckPositionRequestModel, CheckPositionRequest>()
+            .ForMember(dest => dest.Position,
+                opt => opt.MapFrom(src => new Position { Name = src.Name }));
     }
 }
