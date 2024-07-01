@@ -17,10 +17,10 @@ public class EmployeeRegistrationCreateDbValidator : AbstractValidator<EmployeeR
                     Name = positionModel.Position
                 }, cancellationToken);
 
-                if (positions.IsPositionExists)
+                if (!positions.IsPositionExists)
                 {
                     context.AddFailure(nameof(positionModel),
-                        $"Position with this {positionModel.Name} already exists.");
+                        $"Position with this {positionModel.Position} already exists.");
                 }
             });
     }
