@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Grpc.Net.Client;
+﻿using Grpc.Net.Client;
 using WC.Service.Registration.Domain;
 using WC.Service.Registration.gRPC.Client.Models.Position;
 
@@ -8,12 +7,9 @@ namespace WC.Service.Registration.gRPC.Client.Clients;
 public class GreeterPositionsClient : IGreeterPositionsClient
 {
     private readonly GreeterPositions.GreeterPositionsClient _client;
-    private readonly IMapper _mapper;
 
-    public GreeterPositionsClient(IMapper mapper, IPositionsClientConfiguration configuration)
+    public GreeterPositionsClient(IPositionsClientConfiguration configuration)
     {
-        _mapper = mapper;
-
         var channel = GrpcChannel.ForAddress(configuration.GetBaseUrl());
         _client = new GreeterPositions.GreeterPositionsClient(channel);
     }
@@ -22,8 +18,13 @@ public class GreeterPositionsClient : IGreeterPositionsClient
         CancellationToken cancellationToken)
     {
         var checkResult =
-            await _client.CheckPositionExistsAsync(_mapper.Map<CheckPositionRequest>(checkPositionRequest),
-                cancellationToken: cancellationToken);
+            await _client.CheckPositionExistsAsync(new CheckPositionRequest
+            {
+                Position = new Position
+                {
+                    Name = checkPositionRequest.Name
+                }
+            }, cancellationToken: cancellationToken);
 
         return new CheckPositionResponseModel
         {
