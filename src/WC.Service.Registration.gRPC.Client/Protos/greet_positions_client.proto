@@ -5,17 +5,19 @@ option csharp_namespace = "WC.Service.Registration.gRPC.Client.Clients";
 package positions;
 
 service GreeterPositions {
-  rpc CheckPositionExists (CheckPositionRequest) returns (CheckPositionResponse);
+  rpc SearchPosition(SearchPositionRequest) returns (SearchPositionResponse);
 }
 
 message Position {
   string name = 1;
 }
 
-message CheckPositionRequest {
+message SearchPositionRequest {
   Position position = 1;
 }
 
-message CheckPositionResponse {
-  bool isPositionExists = 1;
+message SearchPositionResponse {
+  string id = 1;
+  string name = 2;
+  string description = 3;
 }

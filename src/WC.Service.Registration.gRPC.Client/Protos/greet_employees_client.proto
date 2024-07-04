@@ -15,8 +15,9 @@ message Employee {
   string patronymic = 4;
   string email = 5;
   string password = 6;
-  string position = 7;
+  string positionId = 7;
 }
+
 message EmployeeCreateRequest {
   Employee employee = 1;
 }

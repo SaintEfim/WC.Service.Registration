@@ -22,10 +22,6 @@ public class RegistrationDomainModule : Module
             .As<IEmployeesClientConfiguration>()
             .InstancePerLifetimeScope();
         
-        builder.RegisterType<PositionsesClientConfiguration>()
-            .As<IPositionsClientConfiguration>()
-            .InstancePerLifetimeScope();
-        
         builder.RegisterType<BCryptPasswordHasher>()
             .As<IBCryptPasswordHasher>()
             .InstancePerLifetimeScope();
