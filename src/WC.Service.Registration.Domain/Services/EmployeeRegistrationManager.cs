@@ -1,28 +1,26 @@
-﻿using System.Collections.Immutable;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentValidation;
 using WC.Library.BCryptPasswordHash;
 using WC.Library.Domain.Models;
 using WC.Library.Domain.Validators;
+using WC.Library.Domain.Services.Validators;
 using WC.Service.Registration.gRPC.Client.Clients;
 using WC.Service.Registration.gRPC.Client.Models.Employee;
 using EmployeeRegistrationModel = WC.Service.Registration.Domain.Models.EmployeeRegistrationModel;
 
 namespace WC.Service.Registration.Domain.Services;
 
-public class EmployeeRegistrationManager : IEmployeeRegistrationManager
+public class EmployeeRegistrationManager : ValidatorBase<EmployeeRegistrationModel>, IEmployeeRegistrationManager
 {
     private readonly IBCryptPasswordHasher _passwordHasher;
-    private readonly IEnumerable<IValidator> _validators;
     private readonly IMapper _mapper;
     private readonly IGreeterEmployeesClient _client;
 
     public EmployeeRegistrationManager(IMapper mapper,
         IEnumerable<IValidator> validators, IBCryptPasswordHasher passwordHasher,
-        IGreeterEmployeesClient client)
+        IGreeterEmployeesClient client) : base(validators)
     {
         _mapper = mapper;
-        _validators = validators;
         _passwordHasher = passwordHasher;
         _client = client;
     }
@@ -30,7 +28,7 @@ public class EmployeeRegistrationManager : IEmployeeRegistrationManager
     public async Task<CreateResultModel> Register(EmployeeRegistrationModel model,
         CancellationToken cancellationToken = default)
     {
-        await Validate<IDomainCreateValidator>(model);
+        Validate<IDomainCreateValidator>(model, cancellationToken);
 
         var employee = _mapper.Map<EmployeeCreateModel>(model);
 
@@ -39,30 +37,5 @@ public class EmployeeRegistrationManager : IEmployeeRegistrationManager
         var createResult = await _client.Create(employee, cancellationToken);
 
         return createResult;
-    }
-
-    private async Task Validate<TV>(EmployeeRegistrationModel model)
-    {
-        var validationSet = _validators.Where(v => v.GetType().IsAssignableTo(typeof(TV))).Cast<IValidator<EmployeeRegistrationModel>>();
-        await Validate(model, validationSet);
-    }
-
-    private static async Task Validate<TPayload>(
-        TPayload model,
-        IEnumerable<IValidator<TPayload>> source,
-        CancellationToken cancellationToken = default)
-        where TPayload : class
-    {
-        var validationTasks = source.Select(x => x.ValidateAsync(model, cancellationToken));
-        var results = await Task.WhenAll(validationTasks);
-
-        var failures = results.SelectMany(x => x.Errors)
-            .Where(x => x != null)
-            .ToImmutableList();
-
-        if (!failures.IsEmpty)
-        {
-            throw new ValidationException(failures);
-        }
     }
 }

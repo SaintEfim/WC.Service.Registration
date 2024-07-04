@@ -8,27 +8,27 @@ public class GreeterPositionsClient : IGreeterPositionsClient
 {
     private readonly GreeterPositions.GreeterPositionsClient _client;
 
-    public GreeterPositionsClient(IPositionsClientConfiguration configuration)
+    public GreeterPositionsClient(IEmployeesClientConfiguration configuration)
     {
         var channel = GrpcChannel.ForAddress(configuration.GetBaseUrl());
         _client = new GreeterPositions.GreeterPositionsClient(channel);
     }
 
-    public async Task<CheckPositionResponseModel> CheckPosition(CheckPositionRequestModel checkPositionRequest,
+    public async Task<SearchPositionResponseModel?> SearchPosition(SearchPositionRequestModel request,
         CancellationToken cancellationToken)
     {
-        var checkResult =
-            await _client.CheckPositionExistsAsync(new CheckPositionRequest
+        var searchResult =
+            await _client.SearchPositionAsync(new SearchPositionRequest
             {
                 Position = new Position
                 {
-                    Name = checkPositionRequest.Name
+                    Name = request.Name
                 }
             }, cancellationToken: cancellationToken);
 
-        return new CheckPositionResponseModel
+        return new SearchPositionResponseModel
         {
-            IsPositionExists = checkResult.IsPositionExists
+            Id = Guid.Parse(searchResult.Id)
         };
     }
 }
