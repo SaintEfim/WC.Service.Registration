@@ -16,10 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{D17F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.Registration.Domain.Test", "src\WC.Service.Registration.Domain.Test\WC.Service.Registration.Domain.Test.csproj", "{8624ED67-A73F-48D0-9749-62B2F648CAAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.Registration.gRPC.Client", "src\WC.Service.Registration.gRPC.Client\WC.Service.Registration.gRPC.Client.csproj", "{8FD751BA-8765-4430-8E42-BCB84E7643BF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.Registration.gRPC.Client.Abstractions", "src\WC.Service.Registration.gRPC.Client.Abstractions\WC.Service.Registration.gRPC.Client.Abstractions.csproj", "{40F129AA-8CFF-4FC0-B570-2C2BDAF1BA08}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,14 +38,6 @@ Global
 		{8624ED67-A73F-48D0-9749-62B2F648CAAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8624ED67-A73F-48D0-9749-62B2F648CAAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8624ED67-A73F-48D0-9749-62B2F648CAAE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8FD751BA-8765-4430-8E42-BCB84E7643BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8FD751BA-8765-4430-8E42-BCB84E7643BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8FD751BA-8765-4430-8E42-BCB84E7643BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8FD751BA-8765-4430-8E42-BCB84E7643BF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{40F129AA-8CFF-4FC0-B570-2C2BDAF1BA08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{40F129AA-8CFF-4FC0-B570-2C2BDAF1BA08}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{40F129AA-8CFF-4FC0-B570-2C2BDAF1BA08}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{40F129AA-8CFF-4FC0-B570-2C2BDAF1BA08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8624ED67-A73F-48D0-9749-62B2F648CAAE} = {D17F8818-E3D1-4ED2-9702-8DDB690F86C5}
