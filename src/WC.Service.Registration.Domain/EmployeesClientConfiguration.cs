@@ -1,12 +1,13 @@
 ﻿using Microsoft.Extensions.Configuration;
+using WC.Service.Employees.gRPC.Client;
 
 namespace WC.Service.Registration.Domain;
 
-public class EmployeesesClientConfiguration : IEmployeesClientConfiguration
+public class EmployeesClientConfiguration : IEmployeesClientConfiguration
 {
     private readonly Lazy<string> _baseUrl;
 
-    public EmployeesesClientConfiguration(IConfiguration config)
+    public EmployeesClientConfiguration(IConfiguration config)
     {
         _baseUrl = new Lazy<string>(() => config.GetValue<string>("EmployeeService:Url") ??
                                           throw new InvalidOperationException(

@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\WC.Service.Registration.Domain.Abstractions\WC.Service.Registration.Domain.Abstractions.csproj" />
-      <ProjectReference Include="..\WC.Service.Registration.gRPC.Client\WC.Service.Registration.gRPC.Client.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -24,6 +23,7 @@
       <PackageReference Include="WC.Library.BCryptPasswordHash.Abstactions" Version="1.0.0" />
       <PackageReference Include="WC.Library.Domain" Version="1.0.15" />
       <PackageReference Include="WC.Library.Employee.Shared" Version="1.0.2" />
+      <PackageReference Include="WC.Service.Employees.gRPC.Client" Version="1.0.2" />
     </ItemGroup>
 
 </Project>
