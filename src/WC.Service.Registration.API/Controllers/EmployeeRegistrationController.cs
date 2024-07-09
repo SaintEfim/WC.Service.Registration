@@ -17,7 +17,6 @@ namespace WC.Service.Registration.API.Controllers;
 public class EmployeeRegistrationController : ApiControllerBase<EmployeeRegistrationController>
 {
     private readonly IEmployeeRegistrationManager _manager;
-    private readonly IMapper _mapper;
 
     /// <inheritdoc/>
     public EmployeeRegistrationController(
@@ -25,7 +24,6 @@ public class EmployeeRegistrationController : ApiControllerBase<EmployeeRegistra
         ILogger<EmployeeRegistrationController> logger, IEmployeeRegistrationManager manager)
         : base(mapper, logger)
     {
-        _mapper = mapper;
         _manager = manager;
     }
 
@@ -46,6 +44,6 @@ public class EmployeeRegistrationController : ApiControllerBase<EmployeeRegistra
             await _manager.Register(Mapper.Map<EmployeeRegistrationModel>(payload), cancellationToken);
 
         return CreatedAtAction(nameof(RegisterEmployee), new { id = createResult.Id },
-            _mapper.Map<CreateActionResultDto>(createResult));
+            Mapper.Map<CreateActionResultDto>(createResult));
     }
 }
