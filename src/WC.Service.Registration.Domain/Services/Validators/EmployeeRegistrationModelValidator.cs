@@ -1,10 +1,11 @@
 ﻿using FluentValidation;
+using WC.Library.Domain.Validators;
 using WC.Library.Employee.Shared.Validators;
 using WC.Service.Registration.Domain.Models;
 
 namespace WC.Service.Registration.Domain.Services.Validators;
 
-public class EmployeeRegistrationModelValidator : AbstractValidator<EmployeeRegistrationModel>
+public class EmployeeRegistrationModelValidator : AbstractValidator<EmployeeRegistrationModel>, IDomainCreateValidator
 {
     public EmployeeRegistrationModelValidator()
     {
