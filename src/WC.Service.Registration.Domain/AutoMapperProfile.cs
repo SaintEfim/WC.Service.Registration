@@ -8,6 +8,6 @@ public sealed class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<EmployeeRegistrationModel, EmployeeCreateModel>();
+        CreateMap<EmployeeRegistrationModel, EmployeeCreateRequestModel>();
     }
 }

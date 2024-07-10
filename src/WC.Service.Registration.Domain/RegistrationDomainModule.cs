@@ -15,7 +15,7 @@ public class RegistrationDomainModule : Module
 
         builder.RegisterType<EmployeeRegistrationManager>()
             .As<IEmployeeRegistrationManager>()
-            .SingleInstance();
+            .InstancePerLifetimeScope();
 
         builder.RegisterAssemblyTypes(ThisAssembly)
             .AsClosedTypesOf(typeof(IValidator<>))

@@ -11,7 +11,7 @@ using WC.Service.Registration.Domain.Models;
 
 namespace WC.Service.Registration.Domain.Services;
 
-public class EmployeeRegistrationManager : ValidatorBase<EmployeeRegistrationModel>, IEmployeeRegistrationManager
+public class EmployeeRegistrationManager : ValidatorBase<ModelBase>, IEmployeeRegistrationManager
 {
     private readonly IBCryptPasswordHasher _passwordHasher;
     private readonly IMapper _mapper;
@@ -31,14 +31,14 @@ public class EmployeeRegistrationManager : ValidatorBase<EmployeeRegistrationMod
     public async Task<CreateResultModel> Register(EmployeeRegistrationModel model,
         CancellationToken cancellationToken)
     {
-        Validate<IDomainCreateValidator>(model, cancellationToken);
+        Validate<EmployeeRegistrationModel, IDomainCreateValidator>(model, cancellationToken);
 
-        var positionId = await _positionsClient.SearchPosition(new SearchPositionRequestModel
+        var positionId = await _positionsClient.GetOneByName(new GetOneByNamePositionRequestModel
         {
             Name = model.Position
         }, cancellationToken);
 
-        var employee = _mapper.Map<EmployeeCreateModel>(model);
+        var employee = _mapper.Map<EmployeeCreateRequestModel>(model);
 
         if (Guid.Parse(positionId.Id.ToString()) == Guid.Empty)
         {
