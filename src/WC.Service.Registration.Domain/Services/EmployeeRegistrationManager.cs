@@ -28,17 +28,17 @@ public class EmployeeRegistrationManager : ValidatorBase<ModelBase>, IEmployeeRe
         _positionsClient = positionsClient;
     }
 
-    public async Task<CreateResultModel> Register(EmployeeRegistrationModel model,
+    public async Task<CreateResultModel> Register(EmployeeRegistrationModel employeeRegistration,
         CancellationToken cancellationToken)
     {
-        Validate<EmployeeRegistrationModel, IDomainCreateValidator>(model, cancellationToken);
+        Validate<EmployeeRegistrationModel, IDomainCreateValidator>(employeeRegistration, cancellationToken);
 
         var positionId = await _positionsClient.GetOneByName(new GetOneByNamePositionRequestModel
         {
-            Name = model.Position
+            Name = employeeRegistration.Position
         }, cancellationToken);
 
-        var employee = _mapper.Map<EmployeeCreateRequestModel>(model);
+        var employee = _mapper.Map<EmployeeCreateRequestModel>(employeeRegistration);
 
         if (Guid.Parse(positionId.Id.ToString()) == Guid.Empty)
         {
