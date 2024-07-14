@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using WC.Library.Domain.Models;
 using WC.Library.Web.Models;
+using WC.Service.Authentication.gRPC.Client.Models;
 using WC.Service.Registration.API.Models;
 using WC.Service.Registration.Domain.Models;
 
@@ -12,6 +12,6 @@ public sealed class AutoMapperProfile : Profile
     {
         CreateMap<EmployeeRegistrationCreateDto, EmployeeRegistrationModel>();
 
-        CreateMap<CreateResultModel, CreateActionResultDto>();
+        CreateMap<LoginResponseModel, LoginResponseDto>();
     }
 }
