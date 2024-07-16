@@ -4,12 +4,13 @@ using WC.Library.BCryptPasswordHash;
 using WC.Library.Domain.Models;
 using WC.Library.Domain.Validators;
 using WC.Library.Domain.Services.Validators;
+using WC.Library.Employee.Shared.Exceptions;
+using WC.Library.Shared.Exceptions;
 using WC.Service.Authentication.gRPC.Client.Clients;
 using WC.Service.Authentication.gRPC.Client.Models;
 using WC.Service.Employees.gRPC.Client.Clients;
 using WC.Service.Employees.gRPC.Client.Models.Employee;
 using WC.Service.Employees.gRPC.Client.Models.Position;
-using WC.Service.Registration.Domain.Exceptions;
 using WC.Service.Registration.Domain.Models;
 
 namespace WC.Service.Registration.Domain.Services;
@@ -48,7 +49,7 @@ public class EmployeeRegistrationManager : ValidatorBase<ModelBase>, IEmployeeRe
 
         if (positionId.Id == Guid.Empty)
         {
-            throw new PositionNotFoundException("The employee does not have a position");
+            throw new NotFoundException("The employee does not have a position");
         }
 
         employee.PositionId = Guid.Parse(positionId.Id.ToString());
