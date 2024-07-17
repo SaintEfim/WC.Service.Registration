@@ -68,7 +68,7 @@ public class EmployeeRegistrationManager : ValidatorBase<ModelBase>, IEmployeeRe
 
             return loginResponse;
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             if (createResult != null!)
             {
@@ -86,7 +86,7 @@ public class EmployeeRegistrationManager : ValidatorBase<ModelBase>, IEmployeeRe
                 }
             }
 
-            throw new EmployeeRegistrationException("An error occurred during the employee registration process.", ex);
+            throw new RegistrationFailedException("An error occurred during the employee registration process.");
         }
     }
 }
