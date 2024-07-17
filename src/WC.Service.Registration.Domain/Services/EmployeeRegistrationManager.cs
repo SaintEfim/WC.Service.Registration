@@ -36,7 +36,7 @@ public class EmployeeRegistrationManager : ValidatorBase<ModelBase>, IEmployeeRe
     }
 
     public async Task<LoginResponseModel> Register(EmployeeRegistrationModel employeeRegistration,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         Validate<EmployeeRegistrationModel, IDomainCreateValidator>(employeeRegistration, cancellationToken);
 
