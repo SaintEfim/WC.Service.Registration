@@ -2,8 +2,8 @@
 using FluentValidation;
 using WC.Library.BCryptPasswordHash;
 using WC.Library.Domain.Models;
-using WC.Library.Domain.Validators;
 using WC.Library.Domain.Services.Validators;
+using WC.Library.Domain.Validators;
 using WC.Library.Employee.Shared.Exceptions;
 using WC.Library.Shared.Exceptions;
 using WC.Service.Authentication.gRPC.Client.Clients;
@@ -17,11 +17,11 @@ namespace WC.Service.Registration.Domain.Services;
 
 public class EmployeeRegistrationManager : ValidatorBase<ModelBase>, IEmployeeRegistrationManager
 {
-    private readonly IBCryptPasswordHasher _passwordHasher;
-    private readonly IMapper _mapper;
-    private readonly IGreeterEmployeesClient _employeesClient;
-    private readonly IGreeterPositionsClient _positionsClient;
     private readonly IGreeterAuthenticationClient _authenticationClient;
+    private readonly IGreeterEmployeesClient _employeesClient;
+    private readonly IMapper _mapper;
+    private readonly IBCryptPasswordHasher _passwordHasher;
+    private readonly IGreeterPositionsClient _positionsClient;
 
     public EmployeeRegistrationManager(IMapper mapper,
         IEnumerable<IValidator> validators, IBCryptPasswordHasher passwordHasher,
@@ -47,10 +47,7 @@ public class EmployeeRegistrationManager : ValidatorBase<ModelBase>, IEmployeeRe
 
         var employee = _mapper.Map<EmployeeCreateRequestModel>(employeeRegistration);
 
-        if (positionId.Id == Guid.Empty)
-        {
-            throw new NotFoundException("The employee does not have a position");
-        }
+        if (positionId.Id == Guid.Empty) throw new NotFoundException("The employee does not have a position");
 
         employee.PositionId = Guid.Parse(positionId.Id.ToString());
         employee.Password = _passwordHasher.Hash(employee.Password);
@@ -71,7 +68,6 @@ public class EmployeeRegistrationManager : ValidatorBase<ModelBase>, IEmployeeRe
         catch (Exception)
         {
             if (createResult != null!)
-            {
                 try
                 {
                     await _employeesClient.Delete(new EmployeeDeleteRequestModel
@@ -84,7 +80,6 @@ public class EmployeeRegistrationManager : ValidatorBase<ModelBase>, IEmployeeRe
                     // Log the error, but do not inform the user
                     // Logging can be done here
                 }
-            }
 
             throw new RegistrationFailedException("An error occurred during the employee registration process.");
         }

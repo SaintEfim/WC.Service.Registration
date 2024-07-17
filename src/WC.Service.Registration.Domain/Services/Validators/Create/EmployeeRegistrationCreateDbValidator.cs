@@ -19,10 +19,8 @@ public class EmployeeRegistrationCreateDbValidator : AbstractValidator<EmployeeR
                     }, cancellationToken);
 
                 if (response.Exists)
-                {
                     context.AddFailure(nameof(EmployeeRegistrationModel.Email),
                         "An employee with this email already exists.");
-                }
             });
     }
 }
