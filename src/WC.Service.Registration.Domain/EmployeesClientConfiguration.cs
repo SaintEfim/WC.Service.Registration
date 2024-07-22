@@ -12,7 +12,7 @@ public class EmployeesClientConfiguration : IEmployeesClientConfiguration
     {
         _baseUrl = new Lazy<string>(() => config.GetValue<string>("EmployeeService:Url") ??
                                           throw new InvalidOperationException(
-                                              "Employee REST API service URL must be specified"));
+                                              "Employees REST API service URL must be specified"));
     }
 
     public string GetBaseUrl()

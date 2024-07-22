@@ -60,11 +60,9 @@ public class EmployeeRegistrationManager
         employee.PositionId = Guid.Parse(positionId.Id.ToString());
         employee.Password = _passwordHasher.Hash(employee.Password);
 
-        CreateResultModel createResult = null!;
-
         try
         {
-            createResult = await _employeesClient.Create(employee, cancellationToken);
+            await _employeesClient.Create(employee, cancellationToken);
             var loginResponse = await _authenticationClient.GetLoginResponse(
                 new LoginRequestModel
                 {
@@ -76,20 +74,6 @@ public class EmployeeRegistrationManager
         }
         catch (Exception)
         {
-            if (createResult != null!)
-            {
-                try
-                {
-                    await _employeesClient.Delete(new EmployeeDeleteRequestModel { Id = createResult.Id },
-                        cancellationToken);
-                }
-                catch (Exception)
-                {
-                    // Log the error, but do not inform the user
-                    // Logging can be done here
-                }
-            }
-
             throw new RegistrationFailedException("An error occurred during the employee registration process.");
         }
     }

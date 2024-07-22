@@ -2,6 +2,7 @@
 using FluentValidation;
 using WC.Library.BCryptPasswordHash;
 using WC.Service.Authentication.gRPC.Client;
+using WC.Service.EmailDomains.gRPC.Client;
 using WC.Service.Employees.gRPC.Client;
 using WC.Service.Registration.Domain.Services;
 
@@ -13,6 +14,7 @@ public class RegistrationDomainModule : Module
         ContainerBuilder builder)
     {
         builder.RegisterModule<EmployeeClientModule>();
+        builder.RegisterModule<EmailDomainsClientModule>();
         builder.RegisterModule<AuthenticationClientModule>();
 
         builder.RegisterType<EmployeeRegistrationManager>()
@@ -25,6 +27,10 @@ public class RegistrationDomainModule : Module
 
         builder.RegisterType<EmployeesClientConfiguration>()
             .As<IEmployeesClientConfiguration>()
+            .InstancePerLifetimeScope();
+
+        builder.RegisterType<EmailDomainsClientConfiguration>()
+            .As<IEmailDomainsClientConfiguration>()
             .InstancePerLifetimeScope();
 
         builder.RegisterType<AuthenticationClientConfiguration>()
