@@ -21,7 +21,8 @@ public class EmployeeRegistrationController : ApiControllerBase<EmployeeRegistra
     /// <inheritdoc/>
     public EmployeeRegistrationController(
         IMapper mapper,
-        ILogger<EmployeeRegistrationController> logger, IEmployeeRegistrationManager manager)
+        ILogger<EmployeeRegistrationController> logger,
+        IEmployeeRegistrationManager manager)
         : base(mapper, logger)
     {
         _manager = manager;

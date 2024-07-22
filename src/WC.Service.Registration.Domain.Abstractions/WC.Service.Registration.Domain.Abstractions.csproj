@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <RootNamespace>WC.Service.Registration.Domain</RootNamespace>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>WC.Service.Registration.Domain</RootNamespace>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="WC.Library.Domain.Abstractions" Version="1.0.7"/>
-        <PackageReference Include="WC.Service.Authentication.gRPC.Client.Abstractions" Version="1.0.0"/>
-        <PackageReference Include="WC.Service.Employees.gRPC.Client.Abstractions" Version="1.0.7"/>
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="WC.Library.Domain.Abstractions" Version="1.0.8"/>
+    <PackageReference Include="WC.Service.Authentication.gRPC.Client.Abstractions" Version="1.0.1"/>
+    <PackageReference Include="WC.Service.Employees.gRPC.Client.Abstractions" Version="1.0.9"/>
+  </ItemGroup>
 
 </Project>

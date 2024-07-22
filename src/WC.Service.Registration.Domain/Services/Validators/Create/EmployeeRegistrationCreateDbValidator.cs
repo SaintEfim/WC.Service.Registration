@@ -7,20 +7,23 @@ namespace WC.Service.Registration.Domain.Services.Validators.Create;
 
 public class EmployeeRegistrationCreateDbValidator : AbstractValidator<EmployeeRegistrationModel>
 {
-    public EmployeeRegistrationCreateDbValidator(IGreeterEmployeesClient employeesClient)
+    public EmployeeRegistrationCreateDbValidator(
+        IGreeterEmployeesClient employeesClient)
     {
         RuleFor(x => x.Email)
-            .CustomAsync(async (email, context, cancellationToken) =>
+            .CustomAsync(async (
+                email,
+                context,
+                cancellationToken) =>
             {
                 var response = await employeesClient.DoesEmployeeWithEmailExist(
-                    new DoesEmployeeWithEmailExistRequestModel
-                    {
-                        Email = email
-                    }, cancellationToken);
+                    new DoesEmployeeWithEmailExistRequestModel { Email = email }, cancellationToken);
 
                 if (response.Exists)
+                {
                     context.AddFailure(nameof(EmployeeRegistrationModel.Email),
                         "An employee with this email already exists.");
+                }
             });
     }
 }

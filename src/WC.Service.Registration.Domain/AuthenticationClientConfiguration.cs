@@ -7,7 +7,8 @@ public class AuthenticationClientConfiguration : IAuthenticationClientConfigurat
 {
     private readonly Lazy<string> _baseUrl;
 
-    public AuthenticationClientConfiguration(IConfiguration config)
+    public AuthenticationClientConfiguration(
+        IConfiguration config)
     {
         _baseUrl = new Lazy<string>(() => config.GetValue<string>("AuthenticationService:Url") ??
                                           throw new InvalidOperationException(

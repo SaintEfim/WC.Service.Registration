@@ -15,7 +15,9 @@ using WC.Service.Registration.Domain.Models;
 
 namespace WC.Service.Registration.Domain.Services;
 
-public class EmployeeRegistrationManager : ValidatorBase<ModelBase>, IEmployeeRegistrationManager
+public class EmployeeRegistrationManager
+    : ValidatorBase<ModelBase>,
+        IEmployeeRegistrationManager
 {
     private readonly IGreeterAuthenticationClient _authenticationClient;
     private readonly IGreeterEmployeesClient _employeesClient;
@@ -23,10 +25,14 @@ public class EmployeeRegistrationManager : ValidatorBase<ModelBase>, IEmployeeRe
     private readonly IBCryptPasswordHasher _passwordHasher;
     private readonly IGreeterPositionsClient _positionsClient;
 
-    public EmployeeRegistrationManager(IMapper mapper,
-        IEnumerable<IValidator> validators, IBCryptPasswordHasher passwordHasher,
-        IGreeterEmployeesClient employeesClient, IGreeterPositionsClient positionsClient,
-        IGreeterAuthenticationClient authenticationClient) : base(validators)
+    public EmployeeRegistrationManager(
+        IMapper mapper,
+        IEnumerable<IValidator> validators,
+        IBCryptPasswordHasher passwordHasher,
+        IGreeterEmployeesClient employeesClient,
+        IGreeterPositionsClient positionsClient,
+        IGreeterAuthenticationClient authenticationClient)
+        : base(validators)
     {
         _mapper = mapper;
         _passwordHasher = passwordHasher;
@@ -35,19 +41,21 @@ public class EmployeeRegistrationManager : ValidatorBase<ModelBase>, IEmployeeRe
         _authenticationClient = authenticationClient;
     }
 
-    public async Task<LoginResponseModel> Register(EmployeeRegistrationModel employeeRegistration,
+    public async Task<LoginResponseModel> Register(
+        EmployeeRegistrationModel employeeRegistration,
         CancellationToken cancellationToken = default)
     {
         Validate<EmployeeRegistrationModel, IDomainCreateValidator>(employeeRegistration, cancellationToken);
 
-        var positionId = await _positionsClient.GetOneByName(new GetOneByNamePositionRequestModel
-        {
-            Name = employeeRegistration.Position
-        }, cancellationToken);
+        var positionId = await _positionsClient.GetOneByName(
+            new GetOneByNamePositionRequestModel { Name = employeeRegistration.Position }, cancellationToken);
 
         var employee = _mapper.Map<EmployeeCreateRequestModel>(employeeRegistration);
 
-        if (positionId.Id == Guid.Empty) throw new NotFoundException("The employee does not have a position");
+        if (positionId.Id == Guid.Empty)
+        {
+            throw new NotFoundException("The employee does not have a position");
+        }
 
         employee.PositionId = Guid.Parse(positionId.Id.ToString());
         employee.Password = _passwordHasher.Hash(employee.Password);
@@ -57,29 +65,30 @@ public class EmployeeRegistrationManager : ValidatorBase<ModelBase>, IEmployeeRe
         try
         {
             createResult = await _employeesClient.Create(employee, cancellationToken);
-            var loginResponse = await _authenticationClient.GetLoginResponse(new LoginRequestModel
-            {
-                Email = employeeRegistration.Email,
-                Password = employeeRegistration.Password
-            }, cancellationToken);
+            var loginResponse = await _authenticationClient.GetLoginResponse(
+                new LoginRequestModel
+                {
+                    Email = employeeRegistration.Email,
+                    Password = employeeRegistration.Password
+                }, cancellationToken);
 
             return loginResponse;
         }
         catch (Exception)
         {
             if (createResult != null!)
+            {
                 try
                 {
-                    await _employeesClient.Delete(new EmployeeDeleteRequestModel
-                    {
-                        Id = createResult.Id
-                    }, cancellationToken);
+                    await _employeesClient.Delete(new EmployeeDeleteRequestModel { Id = createResult.Id },
+                        cancellationToken);
                 }
                 catch (Exception)
                 {
                     // Log the error, but do not inform the user
                     // Logging can be done here
                 }
+            }
 
             throw new RegistrationFailedException("An error occurred during the employee registration process.");
         }
