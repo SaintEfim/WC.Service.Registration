@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using WC.Library.BCryptPasswordHash;
 using WC.Library.Domain.Models;
 using WC.Library.Domain.Services.Validators;
 using WC.Library.Domain.Validators;
@@ -22,20 +21,17 @@ public class EmployeeRegistrationManager
     private readonly IGreeterAuthenticationClient _authenticationClient;
     private readonly IGreeterEmployeesClient _employeesClient;
     private readonly IMapper _mapper;
-    private readonly IBCryptPasswordHasher _passwordHasher;
     private readonly IGreeterPositionsClient _positionsClient;
 
     public EmployeeRegistrationManager(
         IMapper mapper,
         IEnumerable<IValidator> validators,
-        IBCryptPasswordHasher passwordHasher,
         IGreeterEmployeesClient employeesClient,
         IGreeterPositionsClient positionsClient,
         IGreeterAuthenticationClient authenticationClient)
         : base(validators)
     {
         _mapper = mapper;
-        _passwordHasher = passwordHasher;
         _employeesClient = employeesClient;
         _positionsClient = positionsClient;
         _authenticationClient = authenticationClient;
@@ -58,7 +54,6 @@ public class EmployeeRegistrationManager
         }
 
         employee.PositionId = Guid.Parse(positionId.Id.ToString());
-        employee.Password = _passwordHasher.Hash(employee.Password);
 
         try
         {
