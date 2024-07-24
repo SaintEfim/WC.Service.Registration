@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using FluentValidation;
-using WC.Library.BCryptPasswordHash;
 using WC.Service.Authentication.gRPC.Client;
 using WC.Service.EmailDomains.gRPC.Client;
 using WC.Service.Employees.gRPC.Client;
@@ -35,10 +34,6 @@ public class RegistrationDomainModule : Module
 
         builder.RegisterType<AuthenticationClientConfiguration>()
             .As<IAuthenticationClientConfiguration>()
-            .InstancePerLifetimeScope();
-
-        builder.RegisterType<BCryptPasswordHasher>()
-            .As<IBCryptPasswordHasher>()
             .InstancePerLifetimeScope();
     }
 }
