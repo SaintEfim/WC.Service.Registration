@@ -22,7 +22,7 @@ public class EmployeeRegistrationCreateDto
     /// <summary>
     ///     The patronymic of the employee (optional).
     /// </summary>
-    public string? Patronymic { get; set; } = string.Empty;
+    public string? Patronymic { get; set; }
 
     /// <summary>
     ///     The email address of the employee.
