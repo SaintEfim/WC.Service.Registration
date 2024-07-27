@@ -17,7 +17,7 @@ public class EmployeeRegistrationModelValidator : AbstractValidator<EmployeeRegi
             .SetValidator(new NameValidator(nameof(EmployeeRegistrationModel.Surname)));
 
         RuleFor(x => x.Patronymic)
-            .SetValidator(new NameValidator(nameof(EmployeeRegistrationModel.Patronymic)))
+            .SetValidator(new NameValidator(nameof(EmployeeRegistrationModel.Patronymic))!)
             .When(x => !string.IsNullOrEmpty(x.Patronymic));
 
         RuleFor(x => x.Email)
