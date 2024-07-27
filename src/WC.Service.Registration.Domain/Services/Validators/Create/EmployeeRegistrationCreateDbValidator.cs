@@ -1,17 +1,14 @@
 ﻿using FluentValidation;
 using WC.Service.EmailDomains.gRPC.Client.Clients;
 using WC.Service.EmailDomains.gRPC.Client.Models.DoesEmailDomainWithDomainNameExist;
-using WC.Service.Employees.gRPC.Client.Clients;
-using WC.Service.Employees.gRPC.Client.Models.Employee.DoesEmployeeWithEmailExist;
 using WC.Service.Registration.Domain.Models;
 
 namespace WC.Service.Registration.Domain.Services.Validators.Create;
 
-public class EmployeeRegistrationCreateDbValidator : AbstractValidator<EmployeeRegistrationModel>
+public sealed class EmployeeRegistrationCreateDbValidator : AbstractValidator<EmployeeRegistrationModel>
 {
     public EmployeeRegistrationCreateDbValidator(
-        IGreeterEmailDomainsClient emailDomainsClient,
-        IGreeterEmployeesClient employeesClient)
+        IGreeterEmailDomainsClient emailDomainsClient)
     {
         RuleFor(x => x.Email)
             .CustomAsync(async (
@@ -27,16 +24,6 @@ public class EmployeeRegistrationCreateDbValidator : AbstractValidator<EmployeeR
                 if (!domainResponse.Exists)
                 {
                     context.AddFailure(nameof(EmployeeRegistrationModel.Email), "The email domain does not exist.");
-                    return;
-                }
-
-                var response = await employeesClient.DoesEmployeeWithEmailExist(
-                    new DoesEmployeeWithEmailExistRequestModel { Email = email }, cancellationToken);
-
-                if (response.Exists)
-                {
-                    context.AddFailure(nameof(EmployeeRegistrationModel.Email),
-                        "An employee with this email already exists.");
                 }
             });
     }

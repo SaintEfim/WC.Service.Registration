@@ -12,17 +12,9 @@ public class RegistrationDomainModule : Module
     protected override void Load(
         ContainerBuilder builder)
     {
-        builder.RegisterModule<EmployeeClientModule>();
+        builder.RegisterModule<EmployeesClientModule>();
         builder.RegisterModule<EmailDomainsClientModule>();
         builder.RegisterModule<AuthenticationClientModule>();
-
-        builder.RegisterType<EmployeeRegistrationManager>()
-            .As<IEmployeeRegistrationManager>()
-            .InstancePerLifetimeScope();
-
-        builder.RegisterAssemblyTypes(ThisAssembly)
-            .AsClosedTypesOf(typeof(IValidator<>))
-            .AsImplementedInterfaces();
 
         builder.RegisterType<EmployeesClientConfiguration>()
             .As<IEmployeesClientConfiguration>()
@@ -35,5 +27,13 @@ public class RegistrationDomainModule : Module
         builder.RegisterType<AuthenticationClientConfiguration>()
             .As<IAuthenticationClientConfiguration>()
             .InstancePerLifetimeScope();
+
+        builder.RegisterType<EmployeeRegistrationManager>()
+            .As<IEmployeeRegistrationManager>()
+            .InstancePerLifetimeScope();
+
+        builder.RegisterAssemblyTypes(ThisAssembly)
+            .AsClosedTypesOf(typeof(IValidator<>))
+            .AsImplementedInterfaces();
     }
 }
