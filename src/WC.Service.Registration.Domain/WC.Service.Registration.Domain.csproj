@@ -20,7 +20,7 @@
     <PackageReference Include="WC.Library.Employee.Shared" Version="1.0.11"/>
     <PackageReference Include="WC.Service.Authentication.gRPC.Client" Version="1.0.2" />
     <PackageReference Include="WC.Service.EmailDomains.gRPC.Client" Version="1.0.0" />
-    <PackageReference Include="WC.Service.Employees.gRPC.Client" Version="1.0.11" />
+    <PackageReference Include="WC.Service.Employees.gRPC.Client" Version="1.0.12" />
   </ItemGroup>
 
 </Project>
