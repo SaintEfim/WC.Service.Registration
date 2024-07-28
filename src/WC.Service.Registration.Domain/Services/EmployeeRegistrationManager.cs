@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using FluentValidation;
+﻿using FluentValidation;
 using WC.Library.Domain.Models;
 using WC.Library.Domain.Services.Validators;
 using WC.Library.Domain.Validators;

@@ -5,9 +5,9 @@ using WC.Service.Registration.Domain.Models;
 
 namespace WC.Service.Registration.Domain.Services.Validators.Create;
 
-public sealed class EmployeeRegistrationCreateDbValidator : AbstractValidator<EmployeeRegistrationModel>
+public sealed class EmployeeRegistrationCreateEmailDomainValidator : AbstractValidator<EmployeeRegistrationModel>
 {
-    public EmployeeRegistrationCreateDbValidator(
+    public EmployeeRegistrationCreateEmailDomainValidator(
         IGreeterEmailDomainsClient emailDomainsClient)
     {
         RuleFor(x => x.Email)
