@@ -18,6 +18,6 @@ public class EmployeeRegistrationCreateValidator
             .SetValidator(provider.GetService<EmployeeRegistrationModelValidator>());
 
         RuleFor(x => x)
-            .SetValidator(provider.GetService<EmployeeRegistrationCreateEmailDomainValidator>());
+            .SetValidator(provider.GetService<EmployeeRegistrationCreateCheckEmailDomainValidator>());
     }
 }
