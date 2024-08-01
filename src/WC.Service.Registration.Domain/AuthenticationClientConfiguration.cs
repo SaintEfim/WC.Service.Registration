@@ -10,7 +10,7 @@ public class AuthenticationClientConfiguration : IAuthenticationClientConfigurat
     public AuthenticationClientConfiguration(
         IConfiguration config)
     {
-        _baseUrl = new Lazy<string>(() => config.GetValue<string>("AuthenticationService:Url") ??
+        _baseUrl = new Lazy<string>(() => config.GetValue<string>("Services:authentication") ??
                                           throw new InvalidOperationException(
                                               "Authentication REST API service URL must be specified"));
     }

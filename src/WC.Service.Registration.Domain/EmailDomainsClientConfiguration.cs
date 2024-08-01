@@ -10,7 +10,7 @@ public class EmailDomainsClientConfiguration : IEmailDomainsClientConfiguration
     public EmailDomainsClientConfiguration(
         IConfiguration config)
     {
-        _baseUrl = new Lazy<string>(() => config.GetValue<string>("EmailDomainsService:Url") ??
+        _baseUrl = new Lazy<string>(() => config.GetValue<string>("Services:email-domains") ??
                                           throw new InvalidOperationException(
                                               "Email Domains REST API service URL must be specified"));
     }
