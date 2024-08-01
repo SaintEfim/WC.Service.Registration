@@ -1,13 +1,13 @@
 ﻿using FluentValidation;
 using WC.Service.EmailDomains.gRPC.Client.Clients;
-using WC.Service.EmailDomains.gRPC.Client.Models.DoesEmailDomainWithDomainNameExist;
+using WC.Service.EmailDomains.gRPC.Client.Models.DoesEmailDomainExist;
 using WC.Service.Registration.Domain.Models;
 
 namespace WC.Service.Registration.Domain.Services.Validators.Create;
 
-public sealed class EmployeeRegistrationCreateEmailDomainValidator : AbstractValidator<EmployeeRegistrationModel>
+public sealed class EmployeeRegistrationCreateCheckEmailDomainValidator : AbstractValidator<EmployeeRegistrationModel>
 {
-    public EmployeeRegistrationCreateEmailDomainValidator(
+    public EmployeeRegistrationCreateCheckEmailDomainValidator(
         IGreeterEmailDomainsClient emailDomainsClient)
     {
         RuleFor(x => x.Email)
@@ -19,7 +19,7 @@ public sealed class EmployeeRegistrationCreateEmailDomainValidator : AbstractVal
                 var domain = email.Split('@')[1];
 
                 var domainResponse = await emailDomainsClient.DoesEmailDomainWithDomainNameExist(
-                    new DoesEmailDomainWithDomainNameExistRequestModel { DomainName = domain }, cancellationToken);
+                    new DoesEmailDomainExistRequestModel { DomainName = domain }, cancellationToken);
 
                 if (!domainResponse.Exists)
                 {
