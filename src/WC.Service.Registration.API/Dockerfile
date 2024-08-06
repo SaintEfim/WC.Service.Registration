@@ -8,7 +8,6 @@ COPY src/WC.Service.Registration.Domain.Abstractions/WC.Service.Registration.Dom
 RUN dotnet restore src/WC.Service.Registration.API/WC.Service.Registration.API.csproj
 
 COPY src .
-
 WORKDIR /src/WC.Service.Registration.API
 RUN dotnet build -c Release -o /app/build
 
@@ -18,4 +17,5 @@ RUN dotnet publish -c Release -o /app/publish /p:UseAppHost=false
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
 ENTRYPOINT ["dotnet", "WC.Service.Registration.API.dll"]
