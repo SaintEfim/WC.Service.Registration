@@ -20,10 +20,6 @@ public class RegistrationDomainModule : Module
             .As<IEmployeesClientConfiguration>()
             .InstancePerLifetimeScope();
 
-        builder.RegisterType<EmailDomainsClientConfiguration>()
-            .As<IEmailDomainsClientConfiguration>()
-            .InstancePerLifetimeScope();
-
         builder.RegisterType<AuthenticationClientConfiguration>()
             .As<IAuthenticationClientConfiguration>()
             .InstancePerLifetimeScope();
