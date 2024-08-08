@@ -24,8 +24,8 @@ public class RegistrationDomainModule : Module
             .As<IAuthenticationClientConfiguration>()
             .InstancePerLifetimeScope();
 
-        builder.RegisterType<EmployeeRegistrationManager>()
-            .As<IEmployeeRegistrationManager>()
+        builder.RegisterType<RegistrationManager>()
+            .As<IRegistrationManager>()
             .InstancePerLifetimeScope();
 
         builder.RegisterAssemblyTypes(ThisAssembly)

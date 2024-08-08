@@ -7,7 +7,7 @@
 //
 // public class EmployeeRegistrationModelValidatorTest
 // {
-//     private readonly EmployeeRegistrationModelValidator _validator = new();
+//     private readonly RegistrationModelValidator _validator = new();
 //
 //     public EmployeeRegistrationModelValidatorTest()
 //     {
@@ -17,14 +17,14 @@
 //     [Fact]
 //     public void RegistrationRequest_Positive_Create_New_Record()
 //     {
-//         var res = _validator.TestValidate(EmployeeRegistrationData.EmployeeRegistrationModel());
+//         var res = _validator.TestValidate(EmployeeRegistrationData.RegistrationModel());
 //         res.ShouldNotHaveAnyValidationErrors();
 //     }
 //
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_Null_Email()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Email = null!;
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -35,19 +35,19 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_Empty_Email()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Email = string.Empty;
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
 //             .WithErrorMessage("'Email' must not be empty.")
 //             .Only();
 //     }
-//     
+//
 //
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_Null_Password()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Password = null!;
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -58,7 +58,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_Empty_Password()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Password = string.Empty;
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -69,7 +69,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_Short_Password()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Password = new string('x', CommonConstants.GenericPasswordMinLength - 1);
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -80,7 +80,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_Long_Password()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Password = new string('x', CommonConstants.GenericPasswordMaxLength + 1);
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -91,7 +91,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_Password_Without_Uppercase_Letters()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Password = "teeeeeeest@4";
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -102,7 +102,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_Password_Without_Special_Character()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Password = "teeeeeeestE4";
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -113,7 +113,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_Null_Name()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Name = null!;
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -124,7 +124,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_Empty_Name()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Name = string.Empty;
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -135,7 +135,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_Long_Name()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Name = new string('x', CommonConstants.GenericNameMaxLength + 1);
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -147,7 +147,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_A_Name_Where_Not_All_Letters_Are_Cyrillic()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Name = "ИванW";
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -159,7 +159,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_A_Name_Where_The_First_Letter_Is_Not_Capitalized()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Name = "иван";
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -171,7 +171,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_A_Name_Containing_Special_Characters()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Name = "И@ван";
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -183,7 +183,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_Null_Surname()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Surname = null!;
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -194,7 +194,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_Empty_Surname()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Surname = string.Empty;
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -205,7 +205,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_Short_Surname()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Surname = new string('x', CommonConstants.GenericNameMinLength - 1);
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -217,7 +217,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_Long_Surname()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Surname = new string('x', CommonConstants.GenericNameMaxLength + 1);
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -229,7 +229,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_A_Surname_Where_Not_All_Letters_Are_Cyrillic()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Surname = "ИванWов";
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -242,7 +242,7 @@
 //     public void
 //         EmployeeRegistration_Negative_Create_New_Record_With_A_Surname_Where_The_First_Letter_Is_Not_Capitalized()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Surname = "иванов";
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -254,7 +254,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_A_Surname_Containing_Special_Characters()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Surname = "И@ванов";
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -266,7 +266,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_Null_Position()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Position = null!;
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -277,7 +277,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_Empty_Position()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Position = string.Empty;
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -288,7 +288,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_Short_Patronymic()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Patronymic = new string('x', CommonConstants.GenericNameMinLength - 1);
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -300,7 +300,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_Long_Patronymic()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Patronymic = new string('x', CommonConstants.GenericNameMaxLength + 1);
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -312,7 +312,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_A_Patronymic_Where_Not_All_Letters_Are_Cyrillic()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Patronymic = "ИванWич";
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -325,7 +325,7 @@
 //     public void
 //         EmployeeRegistration_Negative_Create_New_Record_With_A_Patronymic_Where_The_First_Letter_Is_Not_Capitalized()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Patronymic = "иванович";
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()
@@ -337,7 +337,7 @@
 //     [Fact]
 //     public void EmployeeRegistration_Negative_Create_New_Record_With_A_Patronymic_Containing_Special_Characters()
 //     {
-//         var model = EmployeeRegistrationData.EmployeeRegistrationModel();
+//         var model = EmployeeRegistrationData.RegistrationModel();
 //         model.Patronymic = "И@ванович";
 //         var res = _validator.TestValidate(model);
 //         res.ShouldHaveAnyValidationError()

@@ -3,9 +3,9 @@ using WC.Service.Registration.Domain.Models;
 
 namespace WC.Service.Registration.Domain.Services;
 
-public interface IEmployeeRegistrationManager
+public interface IRegistrationManager
 {
-    Task<LoginResponseModel> Register(
-        EmployeeRegistrationModel registrationRequestModel,
+    Task<AuthenticationLoginResponseModel> Register(
+        RegistrationModel registrationRequestModel,
         CancellationToken cancellationToken = default);
 }

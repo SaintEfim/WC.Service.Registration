@@ -2,7 +2,7 @@
 
 namespace WC.Service.Registration.Domain.Models;
 
-public class EmployeeRegistrationModel : ModelBase
+public class RegistrationModel : ModelBase
 {
     public string Name { get; set; } = string.Empty;
 
