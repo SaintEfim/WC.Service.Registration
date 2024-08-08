@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using WC.Library.Web.Models;
 using WC.Service.Authentication.gRPC.Client.Models;
 using WC.Service.Registration.API.Models;
+using WC.Service.Registration.API.Models.Authentication;
 using WC.Service.Registration.Domain.Models;
 
 namespace WC.Service.Registration.API;
@@ -10,8 +10,8 @@ public sealed class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<EmployeeRegistrationCreateDto, EmployeeRegistrationModel>();
+        CreateMap<RegistrationCreateDto, RegistrationModel>();
 
-        CreateMap<LoginResponseModel, LoginResponseDto>();
+        CreateMap<AuthenticationLoginResponseModel, AuthenticationLoginResponseDto>();
     }
 }

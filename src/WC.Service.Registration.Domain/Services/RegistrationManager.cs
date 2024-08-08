@@ -11,14 +11,14 @@ using WC.Service.Registration.Domain.Models;
 
 namespace WC.Service.Registration.Domain.Services;
 
-public class EmployeeRegistrationManager
+public class RegistrationManager
     : ValidatorBase<ModelBase>,
-        IEmployeeRegistrationManager
+        IRegistrationManager
 {
     private readonly IGreeterAuthenticationClient _authenticationClient;
     private readonly IGreeterEmployeesClient _employeesClient;
 
-    public EmployeeRegistrationManager(
+    public RegistrationManager(
         IEnumerable<IValidator> validators,
         IGreeterEmployeesClient employeesClient,
         IGreeterAuthenticationClient authenticationClient)
@@ -28,29 +28,29 @@ public class EmployeeRegistrationManager
         _authenticationClient = authenticationClient;
     }
 
-    public async Task<LoginResponseModel> Register(
-        EmployeeRegistrationModel employeeRegistration,
+    public async Task<AuthenticationLoginResponseModel> Register(
+        RegistrationModel registration,
         CancellationToken cancellationToken = default)
     {
-        Validate<EmployeeRegistrationModel, IDomainCreateValidator>(employeeRegistration, cancellationToken);
+        Validate<RegistrationModel, IDomainCreateValidator>(registration, cancellationToken);
 
         try
         {
             await _employeesClient.Create(new EmployeeCreateRequestModel
             {
-                Name = employeeRegistration.Name,
-                Surname = employeeRegistration.Surname,
-                Patronymic = employeeRegistration.Patronymic ?? string.Empty,
-                PositionName = employeeRegistration.Position,
-                Email = employeeRegistration.Email,
-                Password = employeeRegistration.Password
+                Name = registration.Name,
+                Surname = registration.Surname,
+                Patronymic = registration.Patronymic ?? string.Empty,
+                PositionName = registration.Position,
+                Email = registration.Email,
+                Password = registration.Password
             }, cancellationToken);
 
             var loginResponse = await _authenticationClient.GetLoginResponse(
-                new LoginRequestModel
+                new AuthenticationLoginRequestModel
                 {
-                    Email = employeeRegistration.Email,
-                    Password = employeeRegistration.Password
+                    Email = registration.Email,
+                    Password = registration.Password
                 }, cancellationToken);
 
             return loginResponse;

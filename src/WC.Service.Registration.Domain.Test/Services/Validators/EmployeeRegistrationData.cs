@@ -4,8 +4,8 @@ namespace WC.Service.Registration.Domain.Test.Services.Validators;
 
 public static class EmployeeRegistrationData
 {
-    public static readonly Func<EmployeeRegistrationModel> EmployeeRegistrationModel = () =>
-        new EmployeeRegistrationModel
+    public static readonly Func<RegistrationModel> EmployeeRegistrationModel = () =>
+        new RegistrationModel
         {
             Name = "Иван",
             Surname = "Иванов",
