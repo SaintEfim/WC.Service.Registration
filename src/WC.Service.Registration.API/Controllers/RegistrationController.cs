@@ -32,7 +32,6 @@ public class RegistrationController : ApiControllerBase<RegistrationController>
     ///     Creates a new employee registration.
     /// </summary>
     /// <param name="payload">The registration request data.</param>
-    /// <param name="transaction"></param>
     /// <param name="cancellationToken">The operation cancellation token.</param>
     [HttpPost("register")]
     [OpenApiOperation(nameof(Register))]
