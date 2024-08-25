@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using FluentValidation;
 using WC.Service.Authentication.gRPC.Client;
-using WC.Service.EmailDomains.gRPC.Client;
 using WC.Service.Employees.gRPC.Client;
 using WC.Service.Registration.Domain.Services;
 
@@ -13,7 +12,6 @@ public class RegistrationDomainModule : Module
         ContainerBuilder builder)
     {
         builder.RegisterModule<EmployeesClientModule>();
-        builder.RegisterModule<EmailDomainsClientModule>();
         builder.RegisterModule<AuthenticationClientModule>();
 
         builder.RegisterType<EmployeesClientConfiguration>()

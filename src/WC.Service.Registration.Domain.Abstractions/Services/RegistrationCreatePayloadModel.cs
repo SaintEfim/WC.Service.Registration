@@ -1,8 +1,8 @@
 ﻿using WC.Library.Domain.Models;
 
-namespace WC.Service.Registration.Domain.Models;
+namespace WC.Service.Registration.Domain.Services;
 
-public class RegistrationModel : ModelBase
+public class RegistrationCreatePayloadModel : ModelBase
 {
     public string Name { get; set; } = string.Empty;
 
@@ -14,5 +14,5 @@ public class RegistrationModel : ModelBase
 
     public string Password { get; set; } = string.Empty;
 
-    public string Position { get; set; } = string.Empty;
+    public Guid PositionId { get; set; }
 }

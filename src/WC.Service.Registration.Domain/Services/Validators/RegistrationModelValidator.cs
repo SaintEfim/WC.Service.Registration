@@ -1,11 +1,10 @@
 ﻿using FluentValidation;
 using WC.Library.Domain.Validators;
-using WC.Service.Registration.Domain.Models;
 
 namespace WC.Service.Registration.Domain.Services.Validators;
 
 public class RegistrationModelValidator
-    : AbstractValidator<RegistrationModel>,
+    : AbstractValidator<RegistrationCreatePayloadModel>,
         IDomainCreateValidator
 {
     public RegistrationModelValidator()
@@ -25,7 +24,7 @@ public class RegistrationModelValidator
         RuleFor(x => x.Password)
             .NotEmpty();
 
-        RuleFor(x => x.Position)
+        RuleFor(x => x.PositionId)
             .NotEmpty();
     }
 }

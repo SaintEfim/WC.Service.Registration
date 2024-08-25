@@ -40,5 +40,5 @@ public class RegistrationCreateDto
     ///     The position of the employee within the organization.
     /// </summary>
     [Required]
-    public required string Position { get; set; }
+    public required Guid PositionId { get; set; }
 }
