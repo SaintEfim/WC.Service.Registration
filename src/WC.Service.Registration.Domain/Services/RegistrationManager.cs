@@ -7,7 +7,6 @@ using WC.Service.Authentication.gRPC.Client.Clients;
 using WC.Service.Authentication.gRPC.Client.Models;
 using WC.Service.Employees.gRPC.Client.Clients;
 using WC.Service.Employees.gRPC.Client.Models.Employee;
-using WC.Service.Registration.Domain.Models;
 
 namespace WC.Service.Registration.Domain.Services;
 
@@ -29,35 +28,36 @@ public class RegistrationManager
     }
 
     public async Task<AuthenticationLoginResponseModel> Register(
-        RegistrationModel registration,
+        RegistrationCreatePayloadModel registrationCreatePayload,
         CancellationToken cancellationToken = default)
     {
-        Validate<RegistrationModel, IDomainCreateValidator>(registration, cancellationToken);
+        Validate<RegistrationCreatePayloadModel, IDomainCreateValidator>(registrationCreatePayload, cancellationToken);
 
         try
         {
             await _employeesClient.Create(new EmployeeCreateRequestModel
             {
-                Name = registration.Name,
-                Surname = registration.Surname,
-                Patronymic = registration.Patronymic ?? string.Empty,
-                PositionName = registration.Position,
-                Email = registration.Email,
-                Password = registration.Password
+                Name = registrationCreatePayload.Name,
+                Surname = registrationCreatePayload.Surname,
+                Patronymic = registrationCreatePayload.Patronymic ?? string.Empty,
+                PositionId = registrationCreatePayload.PositionId,
+                Email = registrationCreatePayload.Email,
+                Password = registrationCreatePayload.Password
             }, cancellationToken);
 
             var loginResponse = await _authenticationClient.GetLoginResponse(
                 new AuthenticationLoginRequestModel
                 {
-                    Email = registration.Email,
-                    Password = registration.Password
+                    Email = registrationCreatePayload.Email,
+                    Password = registrationCreatePayload.Password
                 }, cancellationToken);
 
             return loginResponse;
         }
         catch (Exception)
         {
-            throw new RegistrationFailedException("An error occurred during the employee registration process.");
+            throw new RegistrationFailedException(
+                "An error occurred during the employee registrationCreatePayload process.");
         }
     }
 }
