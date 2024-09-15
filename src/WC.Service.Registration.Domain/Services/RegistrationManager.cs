@@ -54,10 +54,10 @@ public class RegistrationManager
 
             return loginResponse;
         }
-        catch (Exception)
+        catch (Exception ex)
         {
             throw new RegistrationFailedException(
-                "An error occurred during the employee registrationCreatePayload process.");
+                $"An error occurred during the employee registrationCreatePayload process. {ex.Message}");
         }
     }
 }
