@@ -3,7 +3,7 @@
 on:
   push:
     branches:
-      - main # Триггер срабатывает только при пуше в ветку main
+      - main
 
 jobs:
   build-docker:
