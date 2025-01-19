@@ -6,5 +6,6 @@ public interface IRegistrationManager
 {
     Task<AuthenticationLoginResponseModel> Register(
         RegistrationCreatePayloadModel registrationCreatePayloadRequestModel,
+        bool withAuthentication = true,
         CancellationToken cancellationToken = default);
 }

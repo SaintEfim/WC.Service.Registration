@@ -29,35 +29,57 @@ public class RegistrationManager
 
     public async Task<AuthenticationLoginResponseModel> Register(
         RegistrationCreatePayloadModel registrationCreatePayload,
+        bool withAuthentication = true,
         CancellationToken cancellationToken = default)
     {
         Validate<RegistrationCreatePayloadModel, IDomainCreateValidator>(registrationCreatePayload, cancellationToken);
 
-        try
-        {
-            await _employeesClient.Create(new EmployeeCreateRequestModel
-            {
-                Name = registrationCreatePayload.Name,
-                Surname = registrationCreatePayload.Surname,
-                Patronymic = registrationCreatePayload.Patronymic ?? string.Empty,
-                PositionId = registrationCreatePayload.PositionId,
-                Email = registrationCreatePayload.Email,
-                Password = registrationCreatePayload.Password
-            }, cancellationToken);
-
-            var loginResponse = await _authenticationClient.GetLoginResponse(
-                new AuthenticationLoginRequestModel
+        await ExecuteWithErrorHandlingAsync(
+            async () => await _employeesClient.Create(
+                new EmployeeCreateRequestModel
                 {
+                    Name = registrationCreatePayload.Name,
+                    Surname = registrationCreatePayload.Surname,
+                    Patronymic = registrationCreatePayload.Patronymic ?? string.Empty,
+                    PositionId = registrationCreatePayload.PositionId,
                     Email = registrationCreatePayload.Email,
                     Password = registrationCreatePayload.Password
-                }, cancellationToken);
+                }, cancellationToken),
+            ex => new RegistrationFailedException($"An error occurred while registering the employee. {ex.Message}"));
 
-            return loginResponse;
-        }
-        catch (Exception ex)
+        if (withAuthentication)
         {
-            throw new RegistrationFailedException(
-                $"An error occurred during the employee registrationCreatePayload process. {ex.Message}");
+            return await ExecuteWithErrorHandlingAsync(
+                async () => await _authenticationClient.GetLoginResponse(
+                    new AuthenticationLoginRequestModel
+                    {
+                        Email = registrationCreatePayload.Email,
+                        Password = registrationCreatePayload.Password
+                    }, cancellationToken),
+                ex => new AuthenticationFailedException(
+                    $"An error occurred while authorizing the employee. {ex.Message}"));
+        }
+
+        return new AuthenticationLoginResponseModel
+        {
+            TokenType = null!,
+            AccessToken = null!,
+            ExpiresIn = 0,
+            RefreshToken = null!
+        };
+
+        async Task<T> ExecuteWithErrorHandlingAsync<T>(
+            Func<Task<T>> func,
+            Func<Exception, Exception> exceptionFactory)
+        {
+            try
+            {
+                return await func();
+            }
+            catch (Exception ex)
+            {
+                throw exceptionFactory(ex);
+            }
         }
     }
 }

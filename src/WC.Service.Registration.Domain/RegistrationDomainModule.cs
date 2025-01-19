@@ -31,3 +31,4 @@ public class RegistrationDomainModule : Module
             .AsImplementedInterfaces();
     }
 }
+

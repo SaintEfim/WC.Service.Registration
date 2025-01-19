@@ -4,15 +4,15 @@ namespace WC.Service.Registration.Domain.Services;
 
 public class RegistrationCreatePayloadModel : ModelBase
 {
-    public string Name { get; set; } = string.Empty;
+    public required string Name { get; set; }
 
-    public string Surname { get; set; } = string.Empty;
+    public required string Surname { get; set; }
 
     public string? Patronymic { get; set; }
 
-    public string Email { get; set; } = string.Empty;
+    public required string Email { get; set; }
 
-    public string Password { get; set; } = string.Empty;
+    public required string Password { get; set; }
 
-    public Guid PositionId { get; set; }
+    public required Guid PositionId { get; set; }
 }

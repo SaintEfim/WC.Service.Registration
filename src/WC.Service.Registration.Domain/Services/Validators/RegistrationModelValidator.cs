@@ -15,9 +15,6 @@ public class RegistrationModelValidator
         RuleFor(x => x.Surname)
             .NotEmpty();
 
-        RuleFor(x => x.Patronymic)
-            .NotEmpty();
-
         RuleFor(x => x.Email)
             .NotEmpty();
 

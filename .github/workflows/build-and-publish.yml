@@ -25,6 +25,16 @@ jobs:
           tags: test/app:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          
+      - name: Build Docker Image for CreateAdmin
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./src/WC.Service.Registration.CreateAdmin/Dockerfile
+          push: false
+          tags: test/app-createadmin:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
   push-docker:
     runs-on: ubuntu-latest
@@ -51,5 +61,15 @@ jobs:
           file: ./src/WC.Service.Registration.API/Dockerfile
           push: true
           tags: saintefim/wc-service-registration:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          
+      - name: Push Docker Image for CreateAdmin
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./src/WC.Service.Registration.CreateAdmin/Dockerfile
+          push: true
+          tags: saintefim/wc-service-registration-createadmin:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
