@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using WC.Service.Registration.Domain.Services;
 
 namespace WC.Service.Registration.CreateAdmin;
@@ -7,12 +8,15 @@ public class CreateAdmin
 {
     private readonly IRegistrationManager _registrationManager;
     private readonly ILogger<CreateAdmin> _logger;
+    private readonly IConfiguration _configuration;
 
     public CreateAdmin(
         ILogger<CreateAdmin> logger,
-        IRegistrationManager registrationManager)
+        IRegistrationManager registrationManager,
+        IConfiguration configuration)
     {
         _registrationManager = registrationManager;
+        _configuration = configuration;
         _logger = logger;
     }
 
@@ -34,9 +38,19 @@ public class CreateAdmin
                 : Guid.Parse("00000000-0000-0000-0000-000000000001")
         };
 
+        var withAuthentication = _configuration.GetValue<bool>("WithAuthentication");
+
         try
         {
-            await _registrationManager.Register(registrationPayload,true , cancellationToken);
+            var response =
+                await _registrationManager.Register(registrationPayload, withAuthentication, cancellationToken);
+
+            _logger.LogInformation($"Registration successful");
+            if (withAuthentication)
+            {
+                _logger.LogInformation(
+                    $"AccessToken: {response.AccessToken}\nRefreshToken: {response.RefreshToken}\nExpiresIn: {response.ExpiresIn}");
+            }
         }
         catch (Exception e)
         {
