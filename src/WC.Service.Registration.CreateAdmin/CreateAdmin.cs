@@ -45,7 +45,9 @@ public class CreateAdmin
             var response =
                 await _registrationManager.Register(registrationPayload, withAuthentication, cancellationToken);
 
-            _logger.LogInformation($"Registration successful");
+            _logger.LogInformation("Registration successful");
+
+            _logger.LogInformation(withAuthentication ? "Authentication successful" : "Authentication failed");
             if (withAuthentication)
             {
                 _logger.LogInformation(
