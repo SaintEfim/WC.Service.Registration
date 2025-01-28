@@ -2,6 +2,7 @@
 using WC.Library.Domain.Models;
 using WC.Library.Domain.Services.Validators;
 using WC.Library.Domain.Validators;
+using WC.Library.Employee.Shared.Exceptions;
 using WC.Service.Authentication.gRPC.Client.Clients;
 using WC.Service.Authentication.gRPC.Client.Models;
 using WC.Service.Employees.gRPC.Client.Clients;
@@ -43,11 +44,7 @@ public class RegistrationManager
                     PositionId = registrationCreatePayload.PositionId,
                     Email = registrationCreatePayload.Email,
                     Password = registrationCreatePayload.Password
-                }, cancellationToken), ex =>
-            {
-                Console.WriteLine($"Registration error: {ex.Message}");
-                return null;
-            });
+                }, cancellationToken), ex => throw new RegistrationFailedException($"Registration error: {ex.Message}"));
 
         if (withAuthentication)
         {
