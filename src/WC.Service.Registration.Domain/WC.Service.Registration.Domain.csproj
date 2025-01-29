@@ -18,13 +18,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.1" />
     <PackageReference Include="WC.Library.Domain" Version="1.0.33" />
     <PackageReference Include="WC.Library.Employee.Shared" Version="1.0.13" />
-<<<<<<< HEAD
-    <PackageReference Include="WC.Service.Authentication.gRPC.Client" Version="1.0.15" />
-    <PackageReference Include="WC.Service.Employees.gRPC.Client" Version="1.0.32" />
-=======
-    <PackageReference Include="WC.Service.Authentication.gRPC.Client" Version="1.0.14" />
+    <PackageReference Include="WC.Service.Authentication.gRPC.Client" Version="1.0.16" />
     <PackageReference Include="WC.Service.Employees.gRPC.Client" Version="1.0.33" />
->>>>>>> 7909ae9ed28b553b9617ba862015af7d17756bc6
   </ItemGroup>
 
 </Project>
