@@ -4,7 +4,7 @@ namespace WC.Service.Registration.Domain.Services;
 
 public interface IRegistrationManager
 {
-    Task<AuthenticationLoginResponseModel> Register(
+    Task<AuthenticationLoginResponseModel?> Register(
         RegistrationCreatePayloadModel registrationCreatePayloadRequestModel,
         CancellationToken cancellationToken = default);
 }

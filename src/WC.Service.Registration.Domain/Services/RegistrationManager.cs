@@ -27,7 +27,7 @@ public class RegistrationManager
         _authenticationClient = authenticationClient;
     }
 
-    public async Task<AuthenticationLoginResponseModel> Register(
+    public async Task<AuthenticationLoginResponseModel?> Register(
         RegistrationCreatePayloadModel registrationCreatePayload,
         CancellationToken cancellationToken = default)
     {
@@ -46,23 +46,14 @@ public class RegistrationManager
                 }, cancellationToken),
             ex => throw new RegistrationFailedException($"Registration error: {ex.Message}"));
 
-        return (await ExecuteWithErrorHandlingAsync(
+        return await ExecuteWithErrorHandlingAsync(
             async () => await _authenticationClient.GetLoginResponse(
                 new AuthenticationLoginRequestModel
                 {
                     Email = registrationCreatePayload.Email,
                     Password = registrationCreatePayload.Password
-                }, cancellationToken), ex =>
-            {
-                Console.WriteLine($"Authentication error: {ex.Message}");
-                return new AuthenticationLoginResponseModel
-                {
-                    TokenType = null!,
-                    AccessToken = null!,
-                    ExpiresIn = 0,
-                    RefreshToken = null!
-                };
-            }))!;
+                }, cancellationToken),
+            ex => throw new AuthenticationFailedException($"Authentication failed: {ex.Message}"));
 
         async Task<T?> ExecuteWithErrorHandlingAsync<T>(
             Func<Task<T>> func,

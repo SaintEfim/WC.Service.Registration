@@ -7,31 +7,32 @@ public class CreateAdmin
 {
     private readonly IRegistrationManager _registrationManager;
     private readonly ILogger<CreateAdmin> _logger;
+    private readonly AdminSettingsOptions _options;
 
     public CreateAdmin(
         ILogger<CreateAdmin> logger,
-        IRegistrationManager registrationManager)
+        IRegistrationManager registrationManager,
+        AdminSettingsOptions options)
     {
         _registrationManager = registrationManager;
         _logger = logger;
+        _options = options;
     }
 
     public async Task Create(
         CancellationToken cancellationToken = default)
     {
-        var emailLocalPart = Environment.GetEnvironmentVariable("ADMIN_EMAIL_LOCAL_PART") ?? "admin";
-        var emailDomain = Environment.GetEnvironmentVariable("ADMIN_EMAIL_DOMAIN") ?? "admin.com";
+        var emailLocalPart = _options.AdminEmailLocalPart ?? "admin";
+        var emailDomain = _options.AdminEmailDomain ?? "admin.com";
 
         var registrationPayload = new RegistrationCreatePayloadModel
         {
-            Name = Environment.GetEnvironmentVariable("ADMIN_REGISTRATION_NAME") ?? "Админ",
-            Surname = Environment.GetEnvironmentVariable("ADMIN_REGISTRATION_SURNAME") ?? "Админ",
-            Patronymic = Environment.GetEnvironmentVariable("ADMIN_REGISTRATION_PATRONYMIC") ?? null,
+            Name = _options.AdminRegistrationName ?? "Админ",
+            Surname = _options.AdminRegistrationSurname ?? "Админ",
+            Patronymic = _options.AdminRegistrationPatronymic,
             Email = $"{emailLocalPart}@{emailDomain}",
-            Password = Environment.GetEnvironmentVariable("ADMIN_REGISTRATION_PASSWORD") ?? "Admin@12345678",
-            PositionId = Guid.TryParse(Environment.GetEnvironmentVariable("ADMIN_POSITION_ID"), out var positionId)
-                ? positionId
-                : Guid.Parse("00000000-0000-0000-0000-000000000001")
+            Password = _options.AdminRegistrationPassword ?? "Admin@12345678",
+            PositionId = _options.AdminPositionId
         };
 
         try
@@ -41,7 +42,7 @@ public class CreateAdmin
             _logger.LogInformation("Registration successful");
 
             _logger.LogInformation(
-                $"AccessToken: {response.AccessToken}\nRefreshToken: {response.RefreshToken}\nExpiresIn: {response.ExpiresIn}");
+                $"AccessToken: {response?.AccessToken}\nRefreshToken: {response?.RefreshToken}\nExpiresIn: {response!.ExpiresIn}");
         }
         catch (Exception e)
         {
