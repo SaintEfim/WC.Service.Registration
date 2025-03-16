@@ -9,8 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="WC.Library.Domain.Abstractions" Version="1.0.22" />
-    <PackageReference Include="WC.Service.Authentication.gRPC.Client.Abstractions" Version="1.0.23" />
-    <PackageReference Include="WC.Service.Employees.gRPC.Client.Abstractions" Version="1.0.45" />
+    <PackageReference Include="WC.Service.Authentication.gRPC.Client.Abstractions" Version="1.0.24" />
   </ItemGroup>
 
   <ItemGroup>
