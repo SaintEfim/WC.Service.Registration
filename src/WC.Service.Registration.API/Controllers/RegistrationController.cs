@@ -5,6 +5,7 @@ using WC.Library.Web.Controllers;
 using WC.Library.Web.Models;
 using WC.Service.Registration.API.Models;
 using WC.Service.Registration.API.Models.Authentication;
+using WC.Service.Registration.Domain.Models;
 using WC.Service.Registration.Domain.Services;
 using static Microsoft.AspNetCore.Http.StatusCodes;
 
@@ -41,7 +42,7 @@ public class RegistrationController : ApiControllerBase<RegistrationController>
         [FromBody] RegistrationCreateDto payload,
         CancellationToken cancellationToken = default)
     {
-        return Ok(await _manager.Register(Mapper.Map<RegistrationCreatePayloadModel>(payload),
+        return Ok(await _manager.Register(Mapper.Map<RegistrationModel>(payload),
             cancellationToken: cancellationToken));
     }
 }

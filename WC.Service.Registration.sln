@@ -14,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.Registration.API
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{D17F8818-E3D1-4ED2-9702-8DDB690F86C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.Registration.Domain.Test", "src\WC.Service.Registration.Domain.Test\WC.Service.Registration.Domain.Test.csproj", "{8624ED67-A73F-48D0-9749-62B2F648CAAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.Registration.Domain.Tests", "src\WC.Service.Registration.Domain.Tests\WC.Service.Registration.Domain.Tests.csproj", "{8624ED67-A73F-48D0-9749-62B2F648CAAE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.Registration.CreateAdmin", "src\WC.Service.Registration.CreateAdmin\WC.Service.Registration.CreateAdmin.csproj", "{431F45C5-8EDD-4B0C-A6BB-BE3B1CB12077}"
 EndProject

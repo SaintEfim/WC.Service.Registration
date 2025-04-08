@@ -1,8 +1,8 @@
 ﻿using WC.Library.Domain.Models;
 
-namespace WC.Service.Registration.Domain.Services;
+namespace WC.Service.Registration.Domain.Models;
 
-public class RegistrationCreatePayloadModel : ModelBase
+public class RegistrationModel : ModelBase
 {
     public required string Name { get; set; }
 

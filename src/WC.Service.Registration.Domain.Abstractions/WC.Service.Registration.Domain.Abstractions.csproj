@@ -12,8 +12,4 @@
     <PackageReference Include="WC.Service.Authentication.gRPC.Client.Abstractions" Version="1.0.24" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\"/>
-  </ItemGroup>
-
 </Project>

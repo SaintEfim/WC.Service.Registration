@@ -7,6 +7,7 @@ using WC.Service.Authentication.gRPC.Client.Clients;
 using WC.Service.Authentication.gRPC.Client.Models;
 using WC.Service.Employees.gRPC.Client.Clients;
 using WC.Service.Employees.gRPC.Client.Models.Employee;
+using WC.Service.Registration.Domain.Models;
 
 namespace WC.Service.Registration.Domain.Services;
 
@@ -28,21 +29,21 @@ public class RegistrationManager
     }
 
     public async Task<AuthenticationLoginResponseModel?> Register(
-        RegistrationCreatePayloadModel registrationCreatePayload,
+        RegistrationModel registration,
         CancellationToken cancellationToken = default)
     {
-        Validate<RegistrationCreatePayloadModel, IDomainCreateValidator>(registrationCreatePayload, cancellationToken);
+        Validate<RegistrationModel, IDomainCreateValidator>(registration, cancellationToken);
 
         await ExecuteWithErrorHandlingAsync(
             async () => await _employeesClient.Create(
                 new EmployeeCreateRequestModel
                 {
-                    Name = registrationCreatePayload.Name,
-                    Surname = registrationCreatePayload.Surname,
-                    Patronymic = registrationCreatePayload.Patronymic ?? string.Empty,
-                    PositionId = registrationCreatePayload.PositionId,
-                    Email = registrationCreatePayload.Email,
-                    Password = registrationCreatePayload.Password
+                    Name = registration.Name,
+                    Surname = registration.Surname,
+                    Patronymic = registration.Patronymic ?? string.Empty,
+                    PositionId = registration.PositionId,
+                    Email = registration.Email,
+                    Password = registration.Password
                 }, cancellationToken),
             ex => throw new RegistrationFailedException($"Registration error: {ex.Message}"));
 
@@ -50,8 +51,8 @@ public class RegistrationManager
             async () => await _authenticationClient.GetLoginResponse(
                 new AuthenticationLoginRequestModel
                 {
-                    Email = registrationCreatePayload.Email,
-                    Password = registrationCreatePayload.Password
+                    Email = registration.Email,
+                    Password = registration.Password
                 }, cancellationToken),
             ex => throw new AuthenticationFailedException($"Authentication failed: {ex.Message}"));
 

@@ -1,10 +1,11 @@
 ﻿using FluentValidation;
 using WC.Library.Domain.Validators;
+using WC.Service.Registration.Domain.Models;
 
 namespace WC.Service.Registration.Domain.Services.Validators;
 
 public class RegistrationModelValidator
-    : AbstractValidator<RegistrationCreatePayloadModel>,
+    : AbstractValidator<RegistrationModel>,
         IDomainCreateValidator
 {
     public RegistrationModelValidator()

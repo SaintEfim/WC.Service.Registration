@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using WC.Service.Registration.Domain.Models;
 using WC.Service.Registration.Domain.Services;
 
 namespace WC.Service.Registration.CreateAdmin;
@@ -25,7 +26,7 @@ public class CreateAdmin
         var emailLocalPart = _options.AdminEmailLocalPart ?? "admin";
         var emailDomain = _options.AdminEmailDomain ?? "admin.com";
 
-        var registrationPayload = new RegistrationCreatePayloadModel
+        var registrationPayload = new RegistrationModel
         {
             Name = _options.AdminRegistrationName ?? "Админ",
             Surname = _options.AdminRegistrationSurname ?? "Админ",
