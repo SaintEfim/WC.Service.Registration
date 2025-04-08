@@ -1,6 +1,6 @@
 ﻿using WC.Service.Registration.Domain.Models;
 
-namespace WC.Service.Registration.Domain.Tests.Services;
+namespace WC.Service.Registration.Domain.Tests.Services.Registration;
 
 public static class RegistrationData
 {

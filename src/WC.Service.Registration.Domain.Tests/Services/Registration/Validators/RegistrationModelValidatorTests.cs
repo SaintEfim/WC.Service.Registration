@@ -3,7 +3,7 @@ using FluentValidation.TestHelper;
 using WC.Service.Registration.Domain.Models;
 using WC.Service.Registration.Domain.Services.Validators;
 
-namespace WC.Service.Registration.Domain.Tests.Services.Validators;
+namespace WC.Service.Registration.Domain.Tests.Services.Registration.Validators;
 
 public class RegistrationModelValidatorTests
 {
