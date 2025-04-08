@@ -3,6 +3,7 @@ using FluentValidation;
 using WC.Service.Authentication.gRPC.Client;
 using WC.Service.Employees.gRPC.Client;
 using WC.Service.Registration.Domain.Services;
+using WC.Service.Registration.Domain.Services.Registration;
 
 namespace WC.Service.Registration.Domain;
 

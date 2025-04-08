@@ -9,7 +9,7 @@ using WC.Service.Employees.gRPC.Client.Clients;
 using WC.Service.Employees.gRPC.Client.Models.Employee;
 using WC.Service.Registration.Domain.Models;
 
-namespace WC.Service.Registration.Domain.Services;
+namespace WC.Service.Registration.Domain.Services.Registration;
 
 public class RegistrationManager
     : ValidatorBase<ModelBase>,
@@ -35,17 +35,15 @@ public class RegistrationManager
         Validate<RegistrationModel, IDomainCreateValidator>(registration, cancellationToken);
 
         await ExecuteWithErrorHandlingAsync(
-            async () => await _employeesClient.Create(
-                new EmployeeCreateRequestModel
-                {
-                    Name = registration.Name,
-                    Surname = registration.Surname,
-                    Patronymic = registration.Patronymic ?? string.Empty,
-                    PositionId = registration.PositionId,
-                    Email = registration.Email,
-                    Password = registration.Password
-                }, cancellationToken),
-            ex => throw new RegistrationFailedException($"Registration error: {ex.Message}"));
+            async () => await _employeesClient.Create(new EmployeeCreateRequestModel
+            {
+                Name = registration.Name,
+                Surname = registration.Surname,
+                Patronymic = registration.Patronymic ?? string.Empty,
+                PositionId = registration.PositionId,
+                Email = registration.Email,
+                Password = registration.Password
+            }, cancellationToken), ex => throw new RegistrationFailedException($"Registration error: {ex.Message}"));
 
         return await ExecuteWithErrorHandlingAsync(
             async () => await _authenticationClient.GetLoginResponse(
