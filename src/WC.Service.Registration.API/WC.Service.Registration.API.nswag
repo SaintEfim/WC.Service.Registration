@@ -14,7 +14,7 @@
       "verbose": true,
       "workingDirectory": null,
       "aspNetCoreEnvironment": "$(AspNetCoreEnvironment)",
-      "output": "WC.Service.Registration.API.swagger.json",
+      "output": "WC.Service.Registration.API.swagger.yaml",
       "newLineBehavior": "Auto"
     }
   },
